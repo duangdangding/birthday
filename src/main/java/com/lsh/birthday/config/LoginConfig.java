@@ -19,7 +19,8 @@ public class LoginConfig implements WebMvcConfigurer {
         registration.excludePathPatterns(
                         "/",
                         "/tologin",
-                        "/login"
+                        "/login",
+                        "/interval/num"
                 ).addPathPatterns("/toindex");
     }
 }

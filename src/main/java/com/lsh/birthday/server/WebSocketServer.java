@@ -2,10 +2,13 @@ package com.lsh.birthday.server;
 
 import cn.hutool.core.util.StrUtil;
 import com.lsh.birthday.config.GetHttpSessionConfigurator;
+import com.lsh.birthday.utils.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -24,6 +27,16 @@ public class WebSocketServer {
     //线程安全的Map  
     private static ConcurrentHashMap<String,Session> webSocketMap = new ConcurrentHashMap<>();
     private HttpSession httpSession ;
+    
+    private static RedisUtil redisUtil_wr;
+    @Autowired
+    RedisUtil redisUtil ;
+
+
+    @PostConstruct
+    public void init() {
+        redisUtil_wr = this.redisUtil;
+    }
     /**
      * 连接建立成功调用的方法
      */
@@ -33,6 +46,12 @@ public class WebSocketServer {
         httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         String username = (String) httpSession.getAttribute("username");
         webSocketMap.put(username,session);
+        if (!redisUtil_wr.hasKey("into_num")) {
+            redisUtil_wr.set("into_num",0);
+        }
+//        入场次数
+        long into_num = redisUtil_wr.incr("into_num", 1);
+        logger.info("总入场次数：" + into_num);
         logger.info("当前人数是" + onlineCount.get());
 //        log.info("有新连接加入：{}，当前在线人数为：{}", session.getId(), onlineCount.get());
     }
@@ -65,48 +84,40 @@ public class WebSocketServer {
         message = message.trim();
         if (!StrUtil.hasEmpty(message)) {
             int length = message.length();
-            if (length > 100) {
-                message.substring(0,100);
+            if (length > 200) {
+                message.substring(0,200);
             }
             //        log.info("服务端收到客户端[{}]的消息:{}", session.getId(), message);
             String username = (String) httpSession.getAttribute("username");
             if (message.indexOf("cmd_") != -1) {
                 String dong = message.split("cmd_")[1];
-            /*
-            if ("xvyuan".equals(dong)) {
-                message = "正在许愿哦~~~嘘~~~等待妹子许好愿了";
-            } else if ("chuilazhu".equals(dong)) {
-                message = "fu~~~蜡烛灭了，接下来就开始分蛋糕了哦~";
-            } else if ("fendangao".equals(dong)) {
-                message = "开始分蛋糕了~~~";
-            } else if ("welcome".equals(dong)) {
-                if (username.indexOf("冲") != -1 || username.indexOf("妹子") != -1) {
-                    message = "欢迎今天的主角" + username + "~~~";
-                } else {
-                    message = "欢迎" + username + "~~~";
-                }
-                
-            } else {
-                message = "大家一起祝福哦~";
-            }*/
                 if ("getCount".equals(dong)) {
                     message = message + "_" + onlineCount;
+                } else if (message.indexOf("cmd_zhufu_") != -1) {
+                    if (!redisUtil_wr.hasKey("send_zfnum")) {
+                        redisUtil_wr.set("send_zfnum",0);
+                    }
+                    long send_zfnum = redisUtil_wr.incr("send_zfnum", 1);
+                    logger.info("总送出祝福：" + send_zfnum);
+                } else {
+                    logger.info("开始发送消息："+message);
+                    for(String user:webSocketMap.keySet()) {
+                        this.sendMessage(message, webSocketMap.get(user));
+                    }
                 }
             } else {
                 message = username + "：" + message;
-            }
-            logger.info(message);
-            for(String user:webSocketMap.keySet()) {
-                this.sendMessage(message, webSocketMap.get(user));
+                logger.info("开始发送消息："+message);
+                for(String user:webSocketMap.keySet()) {
+                    this.sendMessage(message, webSocketMap.get(user));
+                }
             }
         }
     }
 
     @OnError
     public void onError(Session session, Throwable error) {
-//        log.error("发生错误");
-        error.printStackTrace();
-        this.sendMessage(error.getMessage(),session);
+        logger.error(error.getMessage());
     }
 
     /**
