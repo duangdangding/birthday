@@ -198,7 +198,10 @@
 
     <div id="wrapper">
         <input id="text" type="text" placeholder="送上祝福~~~(200字以内)"/>
-        <button class="sendbtn">发&nbsp;&nbsp;送</button>
+        <span>
+            <button class="sendbtn">发&nbsp;&nbsp;送</button>
+            <button id="fullBtn" class="sendbtn">全&nbsp;&nbsp;屏</button>
+        </span>
         <p style="color: red">总入场次数<span id="into_num">0</span>，前来祝贺的有<span id="peo_num">0</span>人，共送出了<span id="send_zfnum">0</span>份祝福！！！</p>
         <div class="zhujue">
             <span class="zhujuebtn">
@@ -336,6 +339,7 @@
     function send_zhufu() {
         displayTime();
         websocket.send("cmd_zhufu_" + username);
+        getNums_ot();
     }
     function displayTime() {
         $("#sendzfff").text(5);
@@ -358,8 +362,8 @@
     var websocket = null;
     //判断当前浏览器是否支持WebSocket, 主要此处要更换为自己的地址
     if ('WebSocket' in window) {
-        // websocket = new WebSocket("ws://129.211.113.87:11203/birthday/server");
-        websocket = new WebSocket("ws://localhost:11203/birthday/server");
+        websocket = new WebSocket("ws://129.211.113.87:11203/birthday/server");
+        // websocket = new WebSocket("ws://localhost:11203/birthday/server");
         // websocket = new WebSocket("ws://192.168.0.102:11203/birthday/server");
     } else {
         alert('Not support websocket')
@@ -392,7 +396,7 @@
                 setTimeout(function () {
                     $(".velas").hide();
                 }, 1000);
-            } else if (cmdml == "cmd_fendangao") {
+            } else if (mls == "cmd_fendangao") {
                 showMSG = "开始分蛋糕了~~~";
                 var cakes = $("#cake path");
                 var i = 0;
@@ -418,7 +422,6 @@
             }
             setMessageInnerHTML(showMSG);
             danmuPool.push(showMSG);
-            getNums_ot();
         }
     }
     //连接关闭的回调方法
@@ -516,8 +519,11 @@
         }, dom.clientWidth * 1 + 1000);
     }
 
-    $(".sendbtn").click(function () {
+    $(".sendbtn").eq(0).click(function () {
         send();
+    })
+    $("#fullBtn").click(function () {
+        requestFullScreen();
     })
     $("#text").keydown(function (event) {
         var code = event.keyCode;

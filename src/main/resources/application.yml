@@ -4,10 +4,6 @@ spring:
   thymeleaf:
     cache: false
     mode: HTML5
-logging:
-  config: classpath:logback.xml
-  level: 
-    com.lsh.birthday: trace
     #集成mysql数据库的配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,7 +14,11 @@ logging:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     serialization:
-      write-dates-as-timestamps: false
+      write-dates-as-timestamps: false  
+logging:
+  config: classpath:logback.xml
+  level: 
+    com.lsh.birthday: trace
 
 #mybatis_plus 配置    
 mybatis-plus:

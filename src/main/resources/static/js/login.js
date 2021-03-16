@@ -9,7 +9,7 @@ $('#login-button').click(function (event) {
 			event.preventDefault();
 			$('.form').fadeOut(500);
 			$('.wrapper').addClass('form-success');
-			// requestFullScreen();
+			requestFullScreen();
 			$('#welcomuu').fadeIn(500);
 			$("#welcomuu").html("欢迎***" + userName + "***")
 			setTimeout(function () {

@@ -2,6 +2,8 @@ package com.lsh.birthday.server;
 
 import cn.hutool.core.util.StrUtil;
 import com.lsh.birthday.config.GetHttpSessionConfigurator;
+import com.lsh.birthday.entry.Comment;
+import com.lsh.birthday.mapper.CommentMapper;
 import com.lsh.birthday.utils.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,12 +32,16 @@ public class WebSocketServer {
     
     private static RedisUtil redisUtil_wr;
     @Autowired
-    RedisUtil redisUtil ;
-
+    private RedisUtil redisUtil ;
+    
+    private static CommentMapper commentMapper_bk;
+    @Autowired
+    private CommentMapper commentMapper;
 
     @PostConstruct
     public void init() {
         redisUtil_wr = this.redisUtil;
+        commentMapper_bk = this.commentMapper;
     }
     /**
      * 连接建立成功调用的方法
@@ -62,8 +68,6 @@ public class WebSocketServer {
     @OnClose
     public void onClose(Session session) {
         onlineCount.decrementAndGet(); // 在线数减1
-        Map<String, String> map = session.getPathParameters();
-//        String username = map.get("username");
         try {
             String username = (String) httpSession.getAttribute("username");
             logger.info(username + "离开了~~~当前人数是" + onlineCount.get());
@@ -87,8 +91,11 @@ public class WebSocketServer {
             if (length > 200) {
                 message.substring(0,200);
             }
-            //        log.info("服务端收到客户端[{}]的消息:{}", session.getId(), message);
             String username = (String) httpSession.getAttribute("username");
+            Comment comment = new Comment(username + "：" + message);
+            Long aLong = commentMapper_bk.addComm(comment);
+            logger.info("添加数据库内容:" + comment);
+            //        log.info("服务端收到客户端[{}]的消息:{}", session.getId(), message);
             if (message.indexOf("cmd_") != -1) {
                 String dong = message.split("cmd_")[1];
                 if ("getCount".equals(dong)) {
@@ -117,7 +124,8 @@ public class WebSocketServer {
 
     @OnError
     public void onError(Session session, Throwable error) {
-        logger.error(error.getMessage());
+        error.printStackTrace();
+//        logger.error(error.getMessage());
     }
 
     /**
