@@ -1,0 +1,10 @@
+server:
+  port: 11203
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML5
+logging:
+  config: classpath:logback.xml
+  level: 
+    com.lsh.birthday: trace
