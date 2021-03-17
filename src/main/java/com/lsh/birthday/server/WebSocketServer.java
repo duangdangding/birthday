@@ -5,6 +5,8 @@ import com.lsh.birthday.config.GetHttpSessionConfigurator;
 import com.lsh.birthday.entry.Comment;
 import com.lsh.birthday.mapper.CommentMapper;
 import com.lsh.birthday.utils.RedisUtil;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +87,7 @@ public class WebSocketServer {
      */
     @OnMessage
     public void onMessage(String message, Session session) {
-        message = message.trim();
+        message = Jsoup.clean(message, Whitelist.relaxed()).trim();
         if (!StrUtil.hasEmpty(message)) {
             int length = message.length();
             if (length > 200) {

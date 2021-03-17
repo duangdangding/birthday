@@ -5,6 +5,8 @@ public class Comment {
     private Long commentId;
     private String context;
     
+    public Comment() {
+    }
     public Comment(String context) {
         this.context = context;
     }
