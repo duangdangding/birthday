@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>祝你生日快乐！！！</title>
 <!--    <title>祝妹子生日快乐！</title>-->
     <link rel="stylesheet" th:href="@{css/reset.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{css/style.css}" media="screen" type="text/css"/>
@@ -259,6 +260,24 @@
 <script type="text/javascript">
     var username = null;
     $(function () {
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if(clientWidth>=750){
+                        docEl.style.fontSize = '16px';
+                    }else{
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+            recalc()
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+        
         username = '[[${session.username}]]';
         if (username.indexOf("冲") != -1) {
             /*$(".xvbtn").removeAttr("disabled");
@@ -384,45 +403,37 @@
     //接收到消息的回调方法
     websocket.onmessage = function (event) {
         var mls = event.data;
-        if (mls.indexOf("cmd_getCount") != -1) {
+        /*if (mls.indexOf("cmd_getCount") != -1) {
             peoCount = mls.split("cmd_getCount_")[1];
         } else {
-            var showMSG = "";
-            if (mls == "cmd_xvyuan") {
-                showMSG = "正在许愿哦~~~嘘~~~等待妹子许好愿了";
-            } else if (mls == "cmd_chuilazhu") {
-                showMSG = "fu~~~蜡烛灭了，接下来就开始分蛋糕了哦~";
-                $(".fuego").hide();
-                setTimeout(function () {
-                    $(".velas").hide();
-                }, 1000);
-            } else if (mls == "cmd_fendangao") {
-                showMSG = "开始分蛋糕了~~~";
-                var cakes = $("#cake path");
-                var i = 0;
-                var caks = cakes.length;
-                setInterval(function () {
-                    if (i >= caks) {
-                        $("#showDD").show();
-                        return false;
-                    }
-                    cakes.eq(caks - 1).hide();
-                    cakes.eq(i).hide();
-                    i++;
-                }, 500);
-            } else if (mls.indexOf("cmd_welcome") != -1) {
-                var sss = mls.split("cmd_welcome_")[1];
-                if (sss.indexOf("冲") != -1) {
-                    showMSG = "今天的主角" + sss + "来了~~~";
-                } else {
-                    showMSG = "欢迎" + sss + "入场~~~";
+            
+        }*/
+        var showMSG = "";
+        if (mls == "cmd_chuilazhu") {
+            showMSG = "fu~~~蜡烛灭了，接下来就开始分蛋糕了哦~";
+            $(".fuego").hide();
+            setTimeout(function () {
+                $(".velas").hide();
+            }, 1000);
+        } else if (mls == "cmd_fendangao") {
+            showMSG = "开始分蛋糕了~~~";
+            var cakes = $("#cake path");
+            var i = 0;
+            var caks = cakes.length;
+            setInterval(function () {
+                if (i >= caks) {
+                    $("#showDD").show();
+                    return false;
                 }
-            } else {
-                showMSG = mls;
-            }
-            setMessageInnerHTML(showMSG);
-            danmuPool.push(showMSG);
+                cakes.eq(caks - 1).hide();
+                cakes.eq(i).hide();
+                i++;
+            }, 500);
+        } else {
+            showMSG = mls;
         }
+        setMessageInnerHTML(showMSG);
+        danmuPool.push(showMSG);
     }
     //连接关闭的回调方法
     websocket.onclose = function () {

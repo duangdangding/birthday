@@ -31,11 +31,11 @@ public class WebSocketServer {
     //线程安全的Map  
     private static ConcurrentHashMap<String,Session> webSocketMap = new ConcurrentHashMap<>();
     private HttpSession httpSession ;
-    
+
     private static RedisUtil redisUtil_wr;
     @Autowired
     private RedisUtil redisUtil ;
-    
+
     private static CommentMapper commentMapper_bk;
     @Autowired
     private CommentMapper commentMapper;
@@ -74,7 +74,7 @@ public class WebSocketServer {
             String username = (String) httpSession.getAttribute("username");
             logger.info(username + "离开了~~~当前人数是" + onlineCount.get());
         } catch (IllegalStateException e) {
-            
+
         }
 //        log.info("有一连接关闭：{}，当前在线人数为：{}", session.getId(), onlineCount.get());
     }
@@ -100,26 +100,32 @@ public class WebSocketServer {
             //        log.info("服务端收到客户端[{}]的消息:{}", session.getId(), message);
             if (message.indexOf("cmd_") != -1) {
                 String dong = message.split("cmd_")[1];
-                if ("getCount".equals(dong)) {
+                /*if ("getCount".equals(dong)) {
                     message = message + "_" + onlineCount;
-                } else if (message.indexOf("cmd_zhufu_") != -1) {
+                } else */
+                if (message.indexOf("cmd_zhufu_") != -1) {
+                    String zfname = message.split("cmd_zhufu_")[1];
                     if (!redisUtil_wr.hasKey("send_zfnum")) {
                         redisUtil_wr.set("send_zfnum",0);
                     }
                     long send_zfnum = redisUtil_wr.incr("send_zfnum", 1);
-                    logger.info("总送出祝福：" + send_zfnum);
-                } else {
-                    logger.info("开始发送消息："+message);
-                    for(String user:webSocketMap.keySet()) {
-                        this.sendMessage(message, webSocketMap.get(user));
+//                    logger.info("总送出祝福：" + send_zfnum);
+                    message = zfname + "送上了一份祝福！~";
+                } else if (message.indexOf("cmd_welcome_") != -1) {
+                    String welcome = message.split("cmd_welcome_")[1];
+                    if (welcome.indexOf("冲") != -1) {
+                        message = "今天的主角" + welcome + "来了~~~";
+                    } else {
+                        message = "欢迎" + welcome + "入场~~~";
                     }
+                } else if (message.indexOf("cmd_xvyuan") != -1) {
+                    message = "正在许愿哦~~~嘘~~~等待许愿完成哦~";
                 }
-            } else {
-                message = username + "：" + message;
-                logger.info("开始发送消息："+message);
-                for(String user:webSocketMap.keySet()) {
-                    this.sendMessage(message, webSocketMap.get(user));
-                }
+            }
+            message = username + "：" + message;
+            logger.info("开始发送消息："+message);
+            for(String user:webSocketMap.keySet()) {
+                this.sendMessage(message, webSocketMap.get(user));
             }
         }
     }
