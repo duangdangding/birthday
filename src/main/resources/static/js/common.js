@@ -13,3 +13,13 @@ function requestFullScreen(element) {
         }
     }
 }
+
+/**
+ * min - max 之间的随机数
+ * @param min
+ * @param max
+ * @returns {*}
+ */
+function ranNUm(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+} 

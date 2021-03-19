@@ -27,7 +27,7 @@
 	}
 }
 @-moz-keyframes rotate {
-		from {
+	from {
 		-moz-transform:rotate(0deg)
 	}
 	to {
@@ -54,7 +54,7 @@
 	z-index: 100;
 	position: fixed;
 	left: -250px;
-	bottom: 50px;
+	bottom: 350px;
 	transition: transform .8s;
 	pointer-events: none;
 }
@@ -134,7 +134,7 @@
 	line-height: 18px;
 }
 #QPlayer .icon {
-	/*background: url(img/icon.png) no-repeat;*/
+	background: url(/img/icon.png) no-repeat;
 	cursor: pointer;
 }
 #QPlayer .icon.last, #QPlayer .icon.next {
@@ -170,12 +170,12 @@
 	width: 72px;
 	margin: 0 auto;
 }
-#QPlayer .contr .right {
+#QPlayer .contr .music_right {
 	position: absolute;
 	top: 4px;
 	right: 0;
 }
-#QPlayer .contr .right div {
+#QPlayer .contr .music_right div {
 	float: left;
 	margin-left: 5px;
 }

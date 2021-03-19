@@ -18,4 +18,9 @@ $('#login-button').click(function (event) {
 		});
 	} 
 });
-
+$("#userName").keydown(function (event) {
+	var code = event.keyCode;
+	if (code == 13) {
+		$('#login-button').click();
+	}
+})

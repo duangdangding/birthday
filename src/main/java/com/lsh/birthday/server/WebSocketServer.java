@@ -121,8 +121,9 @@ public class WebSocketServer {
                 } else if (message.indexOf("cmd_xvyuan") != -1) {
                     message = "正在许愿哦~~~嘘~~~等待许愿完成哦~";
                 }
+            } else {
+                message = username + "：" + message;
             }
-            message = username + "：" + message;
             logger.info("开始发送消息："+message);
             for(String user:webSocketMap.keySet()) {
                 this.sendMessage(message, webSocketMap.get(user));
