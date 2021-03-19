@@ -188,7 +188,8 @@ $(function () {
 			 * @link https://github.com/moeshin/API-NeteaseMusic/
 			 */
 			// api1 = 'https://api.littlehands.site/NeteaseMusic/',
-			api1 = 'http://localhost:3000/search?keywords=' + kws,
+			// api1 = 'http://localhost:3000/search?keywords=' + kws,
+			api1 = 'http://129.211.113.87:3000/search?keywords=' + kws,
 			
 			/**
 			 * 重定向API
@@ -229,7 +230,6 @@ $(function () {
 						// 清除当前历史节点之后的内容
 						q.history = q.history.slice(0, ++q.histIndex);
 						var imgggurl_a = obj.attr("imgurl");
-						// debugger
 						$("#mussIMg").attr("src",imgggurl + "?param=106x106");
 						var index = obj.index();
 						q.play(index);
@@ -249,7 +249,6 @@ $(function () {
 				console.log(q.isAuto)
 				if (q.isAuto){
 					$(".songss").eq(0).click();
-					debugger
 					q.play(0);
 				}
 			}
@@ -296,7 +295,6 @@ $(function () {
 					}
 					audio.src = url.replace(/^http:\/\//, 'https://');
 					q.playId = id;
-					debugger
 					if ($player.hasClass('playing'))
 						audio.play();
 				}

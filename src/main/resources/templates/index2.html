@@ -30,9 +30,10 @@
 </head>
 
 <body id="videobox">
+<!-- 音乐播放器 -->
 <div id="QPlayer">
     <div class="body">
-        <div style="margin-left: 20px">
+        <div style="margin-left: 15px">
             <input type="text" value="生日快乐" id="mmmna" /> <button id="serchMU">搜索</button>
         </div>
         <div class="player">
@@ -419,11 +420,13 @@
         }
     }
 
+    var serverUrl = "://129.211.113.87:";
+    // var serverUrl = "://localhost:";
     var websocket = null;
     //判断当前浏览器是否支持WebSocket, 主要此处要更换为自己的地址
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://129.211.113.87:11203/birthday/server");
-        // websocket = new WebSocket("ws://localhost:11203/birthday/server");
+        // websocket = new WebSocket("ws" + serverUrl + "11203/birthday/server");
+        websocket = new WebSocket("ws://localhost:11203/birthday/server");
         // websocket = new WebSocket("ws://192.168.0.102:11203/birthday/server");
     } else {
         alert('Not support websocket')
@@ -506,7 +509,7 @@
     /**
      * 设置 弹幕DOM池 每一个通道最多六条弹幕
      **/
-    const MAX_DM_COUNT = 6;
+    const MAX_DM_COUNT = 3;
     const CHANNEL_COUNT = 10;
     let domPool = [];
     let danmuPool = [];
@@ -518,6 +521,7 @@
     function init() {
         let wrapper = document.getElementById('wrapper')
         // 先new一些span 重复利用这些DOM
+        console
         for (let j = 0; j < CHANNEL_COUNT; j++) {
             let doms = [];
             for (let i = 0; i < MAX_DM_COUNT; i++) {
@@ -530,6 +534,7 @@
                 dom.style.fontWeight = "normal";
                 // DOM的通道是固定的 所以设置好top就不需要再改变了
                 dom.style.top = j * 10 + 'px';
+                debugger;
                 // 放入改通道的DOM池
                 doms.push(dom);
                 // 每次到transition结束的时候 就是弹幕划出屏幕了 将DOM位置重置 再放回DOM池
