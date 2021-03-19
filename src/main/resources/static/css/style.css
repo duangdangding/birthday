@@ -218,7 +218,7 @@ body:-webkit-full-screen {
   transition: transform 7s linear; /* 时间相同 越长的弹幕滑动距离越长 所以越快~ */
   font-size: 14px;
 }
-input {
+#wrapper input {
   /*position: absolute;*/
   bottom: 10px;
   /*left: 150px;*/
