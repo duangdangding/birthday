@@ -153,6 +153,7 @@ var ParticlePool = (function() {
         particles = new ParticlePool(settings.particles.length),
         particleRate = settings.particles.length / settings.particles.duration, // particles/sec
         time;
+    debugger;
 
     // get point on heart with -PI <= t <= PI
     function pointOnHeart(t) {

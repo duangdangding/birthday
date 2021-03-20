@@ -4,16 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>祝你生日快乐！！！</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=yes">
 <!--    <title>祝妹子生日快乐！</title>-->
     <link rel="stylesheet" th:href="@{css/reset.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{css/style.css}" media="screen" type="text/css"/>
     <link rel="stylesheet" th:href="@{css/sakura_normalize.min.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{css/music_style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{css/xin_love.css}" type="text/css"/>
+    <style>
+        html{font-size:62.5%;}
+    </style>
     <!--    <link rel="stylesheet" th:href="@{css/sakura_style.css}" type="text/css" />-->
     <script th:src="@{js/sakura_prefixfree.min.js}"></script>
     <script th:src="@{js/jquery-3.8.min.js}"></script>
     <script th:src="@{js/jquery.marquee.min.js}"></script>
     <script th:src="@{js/music_script.js}"></script>
+    <script th:src="@{js/xin_love.js}"></script>
     <script>
         (function (q) {
             /* 目前只支持网易云音乐的这几种类型
@@ -31,7 +37,8 @@
 </head>
 
 <body id="videobox">
-<!--<canvas id="pinkboard"></canvas>-->
+<!-- 心形 -->
+<canvas id="pinkboard"></canvas>
 <!-- 音乐播放器 -->
 <div id="QPlayer">
     <div class="body">

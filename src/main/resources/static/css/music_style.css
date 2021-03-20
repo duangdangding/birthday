@@ -236,7 +236,7 @@
 	transition: max-height .8s;
 }
 #QPlayer .more.list-show .list{
-	max-height: 358px;
+	max-height: 200px;
 	border: 1px solid rgb(222, 222, 222);
 	transform: none;
 }

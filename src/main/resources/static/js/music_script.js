@@ -15,13 +15,10 @@ window.QPlayer = {
 	var
 		isRandom = q.isRandom,
 		isRotate = q.isRotate;
-
 	if (isRandom === undefined)
 		isRandom = true;
-
 	if (isRotate === undefined)
 		isRotate = true;
-
 	/**
 	 * 变量监听
 	 */
@@ -181,7 +178,6 @@ $(function () {
 	q.isAuto = true;
 	var kws = $("#mmmna").val();
 	const
-
 		/**
 		 * 网易云API
 		 *
@@ -190,7 +186,6 @@ $(function () {
 			// api1 = 'https://api.littlehands.site/NeteaseMusic/',
 			// api1 = 'http://localhost:3000/search?keywords=' + kws,
 		api1 = 'http://129.211.113.87:3000',
-
 		/**
 		 * 重定向API
 		 *
@@ -218,8 +213,6 @@ $(function () {
 					var data = q.list[i];
 					data.name = html_encode(data.name.replace(/\u00A0/g,'\u0020'));
 					var imgggurl = data.artists[0].img1v1Url;
-
-					/*<span>'+data.artist.join('/')+'</span>*/
 					$list.append('<li class="songss" imgurl="'+ imgggurl +'"><strong>'+data.name+'</strong><span>'+data.artists[0].name+'</span></li>');
 				}
 				$listLi = $list.find('li').click(function () {
@@ -237,7 +230,6 @@ $(function () {
 				//触发监听事件
 				q.isRotate = q.isRotate;
 				q.isRandom = q.isRandom;
-
 				q.listIndex = -1;
 				q.histIndex = 0;
 				q.load(random());
@@ -257,7 +249,6 @@ $(function () {
 	 *
 	 * @param int
 	 */
-
 	q.play = function (n) {
 		if (q.load(n))
 			return;
@@ -277,8 +268,8 @@ $(function () {
 			$.ajax({
 				url: api2,
 				data: {
-					url: 'https://music.163.com/song/media/outer/url?id='+id
-					// type: 1
+					url: 'https://music.163.com/song/media/outer/url?id='+id,
+					type: 1
 				},
 				dataType: 'json',
 				success: function (json) {
@@ -304,90 +295,66 @@ $(function () {
 
 	/**
 	 * 加载
-	 *
+	 * 歌词
 	 * @param n
 	 * @return boolean 是否跳过
 	 */
-	var cishu = 0;
 	q.load = function (n) {
-		cishu ++;
-		
-		if (cishu < 2) {
-			console.log("cishu" +cishu)
-			if (typeof(n) === "number") {
-				if (n < 0) {
-					return true;
-				}
-				if ($listLi.eq(n).hasClass('error')) {
-					if (q.history[q.histIndex] === n) {
-						q.history.splice(q.histIndex--, 1);
-					}
-					q.next();
-					return true;
-				}
-			} else {
-				// 首次初始化，不预加载音频，节省移动设备流量
-				return false;
+		if (typeof(n) === "number") {
+			if (n < 0) {
+				return true;
 			}
-			q.listIndex = n;
-			$listLi.removeClass('current').eq(n).addClass('current');
-			var data = q.current = QPlayer.list[n];
-			/*<span class="artist">'+data.artist.join('/')+'</span>*/
-			$title.html('<strong>'+data.name+'</strong><span> - </span><span class="artist">'+data.artists[0].name+'</span>');
-			var imgggurl = data.artists[0].img1v1Url;
-			$cover.attr('src', imgggurl.replace(/^http:\/\//i,'https://'));
-			$already.width('0%');
-			$timer.text('00:00');
-			$lyricOl.addClass('no').html('<li>暂无歌词，请欣赏</li>');
-			lyric.arr = [];
-			lyric.obj = {};
-			lyric.index = -1;
-			$lyricLi = $();
-			$.ajax({
-				url: api1 + '/lyric?id=' + data.id,
-				success: function (json) {
-					var llll = json.lrc.lyric;
-					llll.replace(lyricRegex1, function (match1, t, str) {
-						var times = [];
-						t.replace(lyricRegex2, function (match2, min, s) {
-							times.push(min*60+s*1);
-						});
-						for (var i = 0; i < times.length; i++) {
-							var time = times[i];
-							lyric.arr.push(time);
-							lyric.obj[time] = str?str:'';
-						}
-					});
-					/*llll.replace(lyricRegex1, function (match1, t, str) {
-						var times = [];
-						t.replace(lyricRegex2, function (match2, min, s) {
-							times.push(min*60+s*1);
-						});
-						for (var i = 0; i < times.length; i++) {
-							var time = times[i];
-							if (lyric.obj[time] !== undefined)
-								lyric.obj[time] += '<br>'+str;
-							else {
-								lyric.arr.push(time);
-								lyric.obj[time] = str?str:'';
-							}
-						}
-
-					});*/
-
-					lyric.arr = lyric.arr.sort(function (a, b) {
-						return a-b;
-					});
-					if (lyric.arr.length > 0)
-						$lyricOl.removeClass('no').html('');
-					for (var i = 0; i < lyric.arr.length; i++) {
-						$lyricOl.append('<li>'+lyric.obj[lyric.arr[i]]+'</li>');
-					}
-					$lyricLi = $lyricOl.find('li');
+			if ($listLi.eq(n).hasClass('error')) {
+				if (q.history[q.histIndex] === n) {
+					q.history.splice(q.histIndex--, 1);
 				}
-			});
-			isLoad = true;
-		} 
+				q.next();
+				return true;
+			}
+		} else {
+			// 首次初始化，不预加载音频，节省移动设备流量
+			return false;
+		}
+		q.listIndex = n;
+		$listLi.removeClass('current').eq(n).addClass('current');
+		var data = q.current = QPlayer.list[n];
+		$title.html('<strong>'+data.name+'</strong><span> - </span><span class="artist">'+data.artists[0].name+'</span>');
+		var imgggurl = data.artists[0].img1v1Url;
+		$cover.attr('src', imgggurl.replace(/^http:\/\//i,'https://'));
+		$already.width('0%');
+		$timer.text('00:00');
+		$lyricOl.addClass('no').html('<li>暂无歌词，请欣赏</li>');
+		lyric.arr = [];
+		lyric.obj = {};
+		lyric.index = -1;
+		$lyricLi = $();
+		$.ajax({
+			url: api1 + '/lyric?id=' + data.id,
+			success: function (json) {
+				var llll = json.lrc.lyric;
+				llll.replace(lyricRegex1, function (match1, t, str) {
+					var times = [];
+					t.replace(lyricRegex2, function (match2, min, s) {
+						times.push(min*60+s*1);
+					});
+					for (var i = 0; i < times.length; i++) {
+						var time = times[i];
+						lyric.arr.push(time);
+						lyric.obj[time] = str?str:'';
+					}
+				});
+				lyric.arr = lyric.arr.sort(function (a, b) {
+					return a-b;
+				});
+				if (lyric.arr.length > 0)
+					$lyricOl.removeClass('no').html('');
+				for (var i = 0; i < lyric.arr.length; i++) {
+					$lyricOl.append('<li>'+lyric.obj[lyric.arr[i]]+'</li>');
+				}
+				$lyricLi = $lyricOl.find('li');
+			}
+		});
+		isLoad = true;
 	};
 
 	/**
@@ -481,35 +448,6 @@ $(function () {
 	});
 
 	/**
-	 * 文档操作
-	 */
-	/*$("body")
-		.on('mouseup touchend', function () {
-			if (isProgressClick) {
-				isProgressClick = false;
-				$player.removeClass('unselectable');
-				if (isNaN(audio.duration))
-					$already.width('0');
-				else {
-					var time = audio.duration*$already.width()/$progress.width();
-					audio.currentTime = time;
-					for (var i = 0; i < lyric.arr.length; i++) 
-						if (lyric.arr[i] >= time) {
-							lyricSelect(lyric.index = i-1);
-							break;
-						}
-				}
-				
-			}
-		}).mousemove(function (e) {
-			mouseProgress(e.pageX);
-		}).on('touchmove',function (e) {
-			if (isProgressClick)
-				e.preventDefault();
-			mouseProgress(e.originalEvent.changedTouches[0].pageX);
-		});*/
-
-	/**
 	 * .play点击
 	 */
 	$play.click(function () {
@@ -519,25 +457,19 @@ $(function () {
 			else
 				q.play();
 	});
-
 	/**
 	 * .next点击
 	 */
 	$player.find('.next').click(q.next);
-
 	/**
 	 * .last点击
 	 */
 	$player.find('.last').click(q.last);
-
-
 	$audio
-
 		/**
 		 * 播放结束
 		 */
 		.on('ended', q.next)
-
 		/**
 		 * 播放中
 		 */
@@ -576,5 +508,4 @@ $(function () {
 	$cover.click(function () {
 		q.isRotate = !q.isRotate;
 	});
-
 });

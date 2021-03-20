@@ -16,6 +16,9 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import javax.xml.crypto.Data;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -90,11 +93,11 @@ public class WebSocketServer {
         message = Jsoup.clean(message, Whitelist.relaxed()).trim();
         if (!StrUtil.hasEmpty(message)) {
             int length = message.length();
-            if (length > 200) {
-                message.substring(0,200);
+            if (length > 500) {
+                message.substring(0,500);
             }
             String username = (String) httpSession.getAttribute("username");
-            Comment comment = new Comment(username + "：" + message);
+            Comment comment = new Comment(username + "：" + message,new Timestamp(new Date().getTime()));
             Long aLong = commentMapper_bk.addComm(comment);
             logger.info("添加数据库内容:" + comment);
             //        log.info("服务端收到客户端[{}]的消息:{}", session.getId(), message);

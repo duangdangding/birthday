@@ -2,7 +2,7 @@ button, hr, input {
     overflow: visible
 }
 
-audio, canvas, progress, video {
+audio, #sakura, progress, video {
     display: inline-block
 }
 
@@ -186,6 +186,3 @@ summary {
 [hidden], template {
     display: none
 }
-
-/*# sourceMappingURL=normalize.min.css.map */
-

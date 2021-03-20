@@ -1,14 +1,18 @@
 package com.lsh.birthday.entry;
 
+import java.sql.Timestamp;
+
 public class Comment {
     
     private Long commentId;
     private String context;
+    private Timestamp createtime;
     
     public Comment() {
     }
-    public Comment(String context) {
+    public Comment(String context,Timestamp createtime) {
         this.context = context;
+        this.createtime = createtime;
     }
 
     public Long getCommentId() {
@@ -27,11 +31,20 @@ public class Comment {
         this.context = context;
     }
 
+    public Timestamp getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Timestamp createtime) {
+        this.createtime = createtime;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
                 "commentId=" + commentId +
                 ", context='" + context + '\'' +
+                ", createtime=" + createtime +
                 '}';
     }
 }
