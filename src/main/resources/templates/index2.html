@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{css/music_style.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{css/zf_style.css}" type="text/css"/>
     <style>
-        html{font-size:62.5%;}
+        /*html{font-size:62.5%;}*/
         .zf_disabled { pointer-events: none; }
         /*搜索框6*/
         .bar6 {background: #F9F0DA;}
@@ -64,10 +64,23 @@
             background   : #ededed;
             border-radius: 10px;
         }
+        #socketMessage {
+            overflow-y: scroll;
+            scrollbar-color: transparent transparent;
+            scrollbar-track-color: transparent;
+            -ms-scrollbar-track-color: transparent;
+        }
+        /*#sakura{width: 100%;height: 100%}*/
+        #cake{
+            margin-bottom: -2em;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
     </style>
     <!--    <link rel="stylesheet" th:href="@{css/sakura_style.css}" type="text/css" />-->
     <script th:src="@{js/jquery-3.8.min.js}"></script>
-<!--    <script th:src="@{js/jquery.marquee.min.js}"></script>-->
+    <script th:src="@{js/jquery.marquee.min.js}"></script>
     <script th:src="@{js/sakura_prefixfree.min.js}"></script>
     <script th:src="@{js/music_script.js}"></script>
     <script th:src="@{js/zf_script.js}"></script>
@@ -130,11 +143,10 @@
     <div class="fuego"></div>
 </div>
 <!-- 蛋糕动画 -->
-<div class="text">
-    <div id="wrapper">
-        <div id="divcake">
-            <svg id="cake" version="1.1" x="0px" y="0px" width="200px" height="500px" viewBox="0 0 200 500"
-                 enable-background="new 0 0 200 500" xml:space="preserve">
+<div id="wrapper" style="display: flow;"></div>
+    <div id="divcake">
+        <svg id="cake" version="1.1" x="0px" y="0px" height="500px" viewBox="0 0 200 500"
+             enable-background="new 0 0 200 500" xml:space="preserve">
     <path fill="#a88679" d="M173.667-13.94c-49.298,0-102.782,0-147.334,0c-3.999,0-4-16.002,0-16.002
 		c44.697,0,96.586,0,147.334,0C177.667-29.942,177.668-13.94,173.667-13.94z">
         <animate id="bizcocho_3" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1" begin="relleno_2.end"
@@ -150,7 +162,7 @@
 		c46.385,0,97.539,0,147.334,0C177.668,411.567,177.667,427.569,173.667,427.569z
                           "/>
     </path>
-                <path fill="#8b6a60" d="M100-178.521c1.858,0,3.364,1.506,3.364,3.363c0,0,0,33.17,0,44.227
+            <path fill="#8b6a60" d="M100-178.521c1.858,0,3.364,1.506,3.364,3.363c0,0,0,33.17,0,44.227
 		c0,19.144,0,57.431,0,76.574c0,10.152,0,40.607,0,40.607c0,1.858-1.506,3.364-3.364,3.364l0,0c-1.858,0-3.364-1.506-3.364-3.364c0,0,0-30.455,0-40.607c0-19.144,0-57.432,0-76.575c0-11.057,0-44.226,0-44.226C96.636-177.015,98.142-178.521,100-178.521
 		L100-178.521z">
         <animate id="relleno_2" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 0.58 1"
@@ -174,7 +186,7 @@
 		c0,0-4.125-4.983,0-7.823c5.201-3.58,16.085,0,23.725,0c8.841,0,20.762,0,20.762,0c3.686,0,8.597,0,19.511,0H102.242z
                           "/>
     </path>
-                <path fill="#a88679" d="M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
+            <path fill="#a88679" d="M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
 		c43.566,0,97.96,0,147.334,0C177.667-31.931,177.666-15.929,173.667-15.929z">
         <animate id="bizcocho_2" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0.25 0 0.58 1"
                  begin="relleno_1.end" dur="0.1s" fill="freeze" values="
@@ -191,7 +203,7 @@
 		c44.697,0,96.586,0,147.334,0C177.667,435.392,177.668,451.394,173.667,451.394z
                           "/>
     </path>
-                <path fill="#8b6a60" d="M101.368-73.685c0,12.164,0,15.18,0,28.519c0,22.702,0-13.661,0,8.304c0,14.48,0,18.233,0,30.512
+            <path fill="#8b6a60" d="M101.368-73.685c0,12.164,0,15.18,0,28.519c0,22.702,0-13.661,0,8.304c0,14.48,0,18.233,0,30.512
 		c0,1.753-2.958,1.847-2.958,0c0-12.68,0-16.277,0-30.401c0-21.983,0,11.66,0-8.305c0-13.027,0-15.992,0-28.628
 		C98.411-75.883,101.368-75.592,101.368-73.685z">
         <animate id="relleno_1" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 0.6 1"
@@ -213,7 +225,7 @@
 		c-4.109,0.65-3.01-10.006,0-10.006C37.129,451.394,149.379,451.394,173.667,451.394z
                           "/>
     </path>
-                <path fill="#a88679" d="M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
+            <path fill="#a88679" d="M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
 		C177.668,5.569,177.667,21.571,173.667,21.571z">
         <animate id="bizcocho_1" attributeName="d" calcMode="spline"
                  keySplines="0 0 1 1; 0 0 1 1; 0 0 1 1; 0.25 0 1 1; 0 0 1 1; 0.25 0 0.6 1" begin="2s" dur="0.1s"
@@ -240,7 +252,7 @@
 		C177.667,459.569,177.666,475.571,173.667,475.571z
                           "/>
     </path>
-                <path fill="#fefae9" d="M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
+            <path fill="#fefae9" d="M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
 	c0-5.143,0-15.427,0-20.568c0-7.333,0-21.998,0-29.33c0-5.523,0-16.569,0-22.092c0-3.295,0-9.885,0-13.181
 	C95.188,2.551,97.353,0,100,0c2.648,0,4.812,2.551,4.812,5.669c0,3.248,0,9.743,0,12.991c0,5.428,0,16.284,0,21.711
 	c0,7.618,0,22.854,0,30.472c0,4.952,0,14.854,0,19.807C104.812,96.292,104.812,107.576,104.812,113.216z">
@@ -288,22 +300,24 @@
 	c-7.606-0.447-6.058-37.895-20.62-23.333c-10.167,10.166-15.972-0.747-25,12C119.547,443.568,121.798,416.515,111.547,415.233z
                           "/>
     </path>
-                <rect x="10" y="475.571" fill="#fefae9" width="180" height="4"/>
+            <rect x="10" y="475.571" fill="#fefae9" width="180" height="4"/>
 </svg>
-        </div>
-        <div style="color: #FF1493">
-            <h1>happy birthday!</h1>
-            <p>妹子~</p>
-        </div>
     </div>
+
+<div style="color: #FF1493;display: flex;justify-content: center;font-size: 1em">
+    <h1>happy birthday!</h1>
+    <h1>妹子~</h1>
+</div>
+<div class="text">
+    
     <!-- 聊天 -->
-    <div class="liaotian" style="margin-top: 5px">
-        <input id="text" type="text" placeholder="送上祝福~~~(500字以内)"/>
-        <span>
+    <div class="liaotian" style="margin-top: 5px;display: flow;">
+        <div style="display: flex;justify-content:center;justify-items: center">
+            <input id="text" type="text" placeholder="送上祝福~~~(500字以内)" style=""/>
             <button class="sendbtn">发&nbsp;&nbsp;送</button>
-            <!--            <button id="fullBtn" class="sendbtn">全&nbsp;&nbsp;屏</button>-->
-        </span>
-        <p style="color: red;margin-bottom: 5px">总入场次数<span id="into_num">0</span>，前来祝贺的有<span id="peo_num">0</span>人，共送出了<span
+                <!--            <button id="fullBtn" class="sendbtn">全&nbsp;&nbsp;屏</button>-->
+        </div>
+        <p style="color: red;margin-bottom: 10px">总入场次数<span id="into_num">0</span>，前来祝贺的有<span id="peo_num">0</span>人，共送出了<span
                 id="send_zfnum">0</span>份祝福！！！</p>
         <div class="zhujue">
             <span class="zhujuebtn">
@@ -313,7 +327,7 @@
             </span>
             <span>
                 <a href="javascript:void(0)" class="paw-button" id="sendzfff" onclick="send_zhufu()">
-                    <div class="text">
+                    <div class="text" style="width: 15px;">
                         <svg>
                             <use xlink:href="#heart"/>
                         </svg>
@@ -385,7 +399,7 @@
         if (username.indexOf("冲") != -1) {
             $(".chuibtn").hide();
             $(".fenbtn").hide();
-            $(".sendzfbtn").hide();
+            $("#sendzfff").hide();
         } else {
             $(".xvbtn").attr({"disabled": "disabled"});
             $(".chuibtn").attr({"disabled": "disabled"});
@@ -456,8 +470,8 @@
     //判断当前浏览器是否支持WebSocket, 主要此处要更换为自己的地址
     if ('WebSocket' in window) {
         // websocket = new WebSocket("ws" + serverUrl + "11203/birthday/server");
-        // websocket = new WebSocket("ws://localhost:11203/birthday/server");
-        websocket = new WebSocket("ws://192.168.0.102:11203/birthday/server");
+        websocket = new WebSocket("ws://localhost:11203/birthday/server");
+        // websocket = new WebSocket("ws://192.168.0.102:11203/birthday/server");
     } else {
         alert('Not support websocket')
     }

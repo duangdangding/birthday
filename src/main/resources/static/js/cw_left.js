@@ -37,8 +37,9 @@ jQuery(document).ready(function ($) {
 		showMessage(visitor + ' 快来逗我玩吧！', 6000);
 	}
 	$(".spig").animate({
-		top: $(".spig").offset().top + addHeight,
-		left: 100
+		// top: $(".spig").offset().top + addHeight,
+		top: $(".spig").offset().top + addHeight/2,
+		left: 20
 	}, {
 		queue: false,
 		duration: 1000

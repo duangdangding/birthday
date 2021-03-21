@@ -3,7 +3,7 @@ button, hr, input {
 }
 
 audio, #sakura, progress, video {
-    display: inline-block
+    /*display: inline-block*/
 }
 
 progress, sub, sup {
@@ -21,10 +21,10 @@ menu, article, aside, details, footer, header, nav, section {
     display: block
 }
 
-h1 {
-    font-size: 2em;
-    margin: .67em 0
-}
+/*h1 {
+    font-size: 1em;
+    margin: 0.67em 0
+}*/
 
 figcaption, figure, main {
     display: block

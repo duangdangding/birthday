@@ -277,7 +277,7 @@ $(function () {
 			var id = q.current.id;
 			isLoad = false;
 			audio.load();
-			if (isExceedTitle())
+			if (isExceedTitle()) {
 				$title.marquee({
 					duration: 15000,
 					gap: 50,
@@ -285,6 +285,8 @@ $(function () {
 					direction: 'left',
 					duplicated: true
 				});
+			}
+				
 			$.ajax({
 				url: api2,
 				data: {

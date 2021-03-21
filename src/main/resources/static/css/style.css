@@ -30,16 +30,18 @@ body:-webkit-full-screen {
 
 }
 #divcake {
-  position: static;
+  /*position: static;*/
   /*margin: -36em auto -2em auto;*/
-  margin-top: -23em;
-  /*margin-bottom: -2em;*/
+  margin-top: -20em;
+  margin-bottom: 1em;
   z-index: 999;
+  display: flex;
+  justify-content: center;
 }
 
 #sakura {
   width:100%;
-  height:150%;
+  height:170%;
   position:absolute;
   z-index:-2;
 }
@@ -237,12 +239,12 @@ body:-webkit-full-screen {
 }
 
 /*左侧侧滑动小人*/
-.spig {display:block;width:156px;height:270px;position:absolute;bottom: 300px;left:180px;z-index:9999;}
+.spig {display:block;width:50px;height:70px;position:absolute;bottom: 15em;left:180px;z-index:9999;}
 #message{color :#191919;border: 1px solid #c4c4c4;background:#ddd;-moz-border-radius:5px;-webkit-border-radius:5px;
   border-radius:5px;min-height:1em;padding:5px;top:-45px;position:absolute;text-align:center;width:auto !important;
   z-index:1000;-moz-box-shadow:0 0 15px #eeeeee;-webkit-box-shadow:0 0 15px #eeeeee;border-color:#eeeeee;
   box-shadow:0 0 15px #eeeeee;outline:none;font-size:0.8rem}
-.mumu{width:9.75rem;height:15.46rem;cursor: move;background:url(/img/chong.gif) no-repeat;
+.mumu{width:9rem;height:14rem;cursor: move;background:url(/img/chong.gif) no-repeat;
   background-size:50% 50%}
 
 .liaotian input {
@@ -252,10 +254,10 @@ body:-webkit-full-screen {
   outline: 0;
   /*border: 1px solid rgba(255, 255, 255, 0.4);*/
   background-color: rgba(255, 255, 255, 0.2);
-  width: 450px;
+  width: 300px;
   border-radius: 3px;
-  padding: 10px 15px;
-  margin: 0 auto 10px auto;
+  /*padding: 10px 15px;*/
+  /*margin: 0 auto 10px auto;*/
   text-align: center;
   font-family: "Microsoft YaHei";
   font-size: 18px;
