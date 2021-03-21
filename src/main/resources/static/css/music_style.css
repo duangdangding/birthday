@@ -235,6 +235,16 @@
 	border: none;
 	transition: max-height .8s;
 }
+#QPlayer .mm_fenye {
+	width: 248px;
+	max-height: .02px;
+	padding: 0;
+	margin: 0;
+	overflow: auto;
+	background: rgb(255,255,255);
+	border: none;
+	transition: max-height .8s;
+}
 #QPlayer .more.list-show .list{
 	max-height: 200px;
 	border: 1px solid rgb(222, 222, 222);

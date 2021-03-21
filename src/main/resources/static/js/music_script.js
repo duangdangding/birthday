@@ -12,6 +12,9 @@ window.QPlayer = {
 	onSetRotate: function () {}
 };
 (function (q) {
+	q.isAuto = true; //是否自动播放，默认false
+	q.isRandom = false; //是否随机播放，默认true
+	q.isRotate = true; //封面是否旋转，默认true
 	var
 		isRandom = q.isRandom,
 		isRotate = q.isRotate;
@@ -176,7 +179,7 @@ $(function () {
 			index: -1
 		};
 	q.isAuto = true;
-	var kws = $("#mmmna").val();
+	
 	const
 		/**
 		 * 网易云API
@@ -200,50 +203,67 @@ $(function () {
 	if (!q.type) {
 		q.type = 'list';
 	}
-
-	//获取播放歌单列表
-	$.ajax({
-		url: api1 + '/search?limit=20&keywords=' + kws,
-		contentType: "application/json; charset=utf-8; application/x-javascript",
-		success: function (json) {
-			q.list = json.result.songs;
-			if (testList()) {
-				//生成播放列表
-				for (var i = 0; i < q.list.length; i++) {
-					var data = q.list[i];
-					data.name = html_encode(data.name.replace(/\u00A0/g,'\u0020'));
-					var imgggurl = data.artists[0].img1v1Url;
-					$list.append('<li class="songss" imgurl="'+ imgggurl +'"><strong>'+data.name+'</strong><span>'+data.artists[0].name+'</span></li>');
-				}
-				$listLi = $list.find('li').click(function () {
-					var obj = $(this);
-					if (!obj.hasClass('error')) {
-						// 清除当前历史节点之后的内容
-						q.history = q.history.slice(0, ++q.histIndex);
-						var imgggurl_a = obj.attr("imgurl");
-						$("#mussIMg").attr("src",imgggurl + "?param=106x106");
-						var index = obj.index();
-						q.play(index);
-						q.history.push(index);
-					}
-				});
-				//触发监听事件
-				q.isRotate = q.isRotate;
-				q.isRandom = q.isRandom;
-				q.listIndex = -1;
-				q.histIndex = 0;
-				q.load(random());
-				q.history = [q.listIndex];
-				$list[0].scrollTop = $list.find('.current')[0].offsetTop - $list[0].offsetTop + 1;
-				if (q.isAuto){
-					$(".songss").eq(0).click();
-					q.play(0);
-				}
-			}
-		},
-		error: testList
+	$("#serchMU").click(function () {
+		startbfMM();
 	});
-
+	$("#mmmna").keydown(function (event) {
+		var code = event.keyCode;
+		if (code == 13) {
+			startbfMM();
+		}
+	})
+	function startbfMM() {
+		var kws = $("#mmmna").val().trim();
+		if (kws.length > 0) {
+//获取播放歌单列表
+			$.ajax({
+				url: api1 + '/search?limit=20&keywords=' + kws,
+				contentType: "application/json; charset=utf-8; application/x-javascript",
+				success: function (json) {
+					q.list = json.result.songs;
+					if (testList()) {
+						$("#songLI").empty();
+						// 存储歌曲图片
+						var simgs = [];
+						//生成播放列表
+						for (var i = 0; i < q.list.length; i++) {
+							var data = q.list[i];
+							data.name = html_encode(data.name.replace(/\u00A0/g,'\u0020'));
+							var imgggurl = data.artists[0].img1v1Url;
+							simgs.push(imgggurl);
+							$list.append('<li><strong>'+data.name+'</strong><span>'+data.artists[0].name+'</span></li>');
+						}
+						$listLi = $list.find('li').click(function () {
+							var obj = $(this);
+							if (!obj.hasClass('error')) {
+								// 清除当前历史节点之后的内容
+								q.history = q.history.slice(0, ++q.histIndex);
+								var index = obj.index();
+								$('#mussIMg').attr('src', simgs[index]);
+								q.play(index);
+								q.history.push(index);
+							}
+						});
+						//触发监听事件
+						q.isRotate = q.isRotate;
+						q.isRandom = q.isRandom;
+						q.listIndex = -1;
+						q.histIndex = 0;
+						q.load(random());
+						q.history = [q.listIndex];
+						$list[0].scrollTop = $list.find('.current')[0].offsetTop - $list[0].offsetTop + 1;
+						if (q.isAuto){
+							$(".songss").eq(0).click();
+							q.play(0);
+						}
+					}
+				},
+				error: testList
+			});
+		}
+	}
+	startbfMM();
+	
 	/**
 	 * 播放
 	 *
