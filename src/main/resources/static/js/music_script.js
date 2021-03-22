@@ -146,6 +146,7 @@ $(function () {
 	function testList() {
 		if (q.list.length)
 			return true;
+		$("#fenye_box").hide();
 		$title.text('没有歌曲');
 		$list.html('<li>没有歌曲</li>');
 		$lyricOl.addClass('no').html('<li>暂无歌词，请欣赏</li>');
@@ -212,12 +213,54 @@ $(function () {
 			startbfMM();
 		}
 	})
+	/*
+	*	Previous Next
+	* */
+	var page = 1;
+	var rows = 30;
+	var offset = 0;
+	$player.find(".page-link").click(function () {
+		var obj = $(this);
+		var fanye = obj.attr("aria-label");
+		if (fanye === "Previous") {
+			if (page > 1) {
+				page = page - 1;
+			}
+		}
+		if (fanye === "Next") {
+			page = page + 1;
+		}
+		if (fanye === "go") {
+			go_page();
+		}
+		startbfMM();
+	});
+	$("#yeshu_num").keydown(function (event) {
+		var code = event.keyCode;
+		if (code == 13) {
+			go_page();
+			startbfMM();
+		}
+	})
+	function go_page() {
+		var index = $("#yeshu_num").val();
+		if (!isNaN(index)) {
+			var num = Math.trunc(index);
+			if (num > 0) {
+				page = index;
+			}
+		}
+	}
 	function startbfMM() {
 		var kws = $("#mmmna").val().trim();
 		if (kws.length > 0) {
+			if (page > 0) {
+				offset = (page - 1) * rows;
+				$("#yeshu_num").val(page);
+			}
 //获取播放歌单列表
 			$.ajax({
-				url: api1 + '/search?limit=20&keywords=' + kws,
+				url: api1 + '/search?limit=' + rows + '&offset=' + offset + '&keywords=' + kws,
 				contentType: "application/json; charset=utf-8; application/x-javascript",
 				success: function (json) {
 					q.list = json.result.songs;
@@ -233,6 +276,7 @@ $(function () {
 							simgs.push(imgggurl);
 							$list.append('<li><strong>'+data.name+'</strong><span>'+data.artists[0].name+'</span></li>');
 						}
+						
 						$listLi = $list.find('li').click(function () {
 							var obj = $(this);
 							if (!obj.hasClass('error')) {
@@ -520,6 +564,9 @@ $(function () {
 		.on('error', q.error);
 
 	$listBtn.click(function () {
+		if (q.list.length > 0) {
+			$("#fenye_box").show();
+		}
 		$more.toggleClass('list-show');
 	});
 

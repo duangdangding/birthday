@@ -54,7 +54,7 @@
 	z-index: 100;
 	position: fixed;
 	left: -250px;
-	bottom: 10em;
+	top: 10em;
 	transition: transform .8s;
 	pointer-events: none;
 }

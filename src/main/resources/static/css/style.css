@@ -189,60 +189,49 @@ body:-webkit-full-screen {
   position:absolute;
   z-index:-2;
 }*/
-#socketMessage{
-  margin-top: 10px;
-  height: 400px;
-  color: #FF69B4 !important;
-  overflow-y:auto !important;
-}
+
 #wrapper {
   /*height: 400px;*/
-  width: 700px;
+  width: 100%;
   /*position: relative;*/
   /*overflow: hidden;*/
   /*background: url(http://www.drama-asia.se/wp-content/uploads/2016/06/14375197_1349947520504_800x600.jpg);*/
 
-  color: #ffffff82;
+  /*color: #ffffff82;*/
   font-size: 14px;
   text-shadow: 1px 1px #000;
   text-align: center;
   margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#wrapper span{
+  position: absolute;
+  white-space: nowrap;
 }
 .right {
-  position: absolute;
   visibility: hidden;
-  white-space: nowrap;
-  /*left: 700px;*/
-  transform: translateX(1000px);
+  transform: translateX(100%);
 }
 .left {
-  position: absolute;
-  white-space: nowrap;
   user-select: none;
-  transition: transform 10s linear; /* 时间相同 越长的弹幕滑动距离越长 所以越快~ */
-  /*font-size: 14px;*/
-}
-#wrapper input {
-  /*position: absolute;*/
-  bottom: 10px;
-  /*left: 150px;*/
-  width: 300px;
-  height: 26px;
+  transition: transform 5s linear; /* 时间相同 越长的弹幕滑动距离越长 所以越快~ */
 }
 
 .zhujue button,.sendbtn {
-  bottom: 8px;
-  width: 100px;
-  height: 38px;
+  width: 7.5em;
+  height: 3.4em;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 0.5em;
+  color: blueviolet;
 }
 
 /*左侧侧滑动小人*/
 .spig {display:block;width:50px;height:70px;position:absolute;bottom: 15em;left:180px;z-index:9999;}
 #message{color :#191919;border: 1px solid #c4c4c4;background:#ddd;-moz-border-radius:5px;-webkit-border-radius:5px;
   border-radius:5px;min-height:1em;padding:5px;top:-45px;position:absolute;text-align:center;width:auto !important;
-  z-index:1000;-moz-box-shadow:0 0 15px #eeeeee;-webkit-box-shadow:0 0 15px #eeeeee;border-color:#eeeeee;
+  z-index:1000;-moz-box-shadow:0 0 15px #eeeeee;-webkit-box-shadow:0 0 15px #eeeeee;min-width: 1em;
   box-shadow:0 0 15px #eeeeee;outline:none;font-size:0.8rem}
 .mumu{width:9rem;height:14rem;cursor: move;background:url(/img/chong.gif) no-repeat;
   background-size:50% 50%}
@@ -252,24 +241,24 @@ body:-webkit-full-screen {
   -moz-appearance: none;
   appearance: none;
   outline: 0;
-  /*border: 1px solid rgba(255, 255, 255, 0.4);*/
+  border: 1px solid rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.2);
-  width: 300px;
+  width: 17em;
+  height: 1.5em;
+  line-height: 1.5em;
   border-radius: 3px;
-  /*padding: 10px 15px;*/
-  /*margin: 0 auto 10px auto;*/
   text-align: center;
   font-family: "Microsoft YaHei";
-  font-size: 18px;
+  /*font-size: 18px;*/
   color: white;
   -webkit-transition-duration: 0.25s;
   transition-duration: 0.25s;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 .liaotian input:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
 .liaotian input:focus {
-  background-color: white;
-  color: red;
+  /*background-color: white;*/
+  color: blue;
 }

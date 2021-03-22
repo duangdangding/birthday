@@ -16,28 +16,37 @@
         /*html{font-size:62.5%;}*/
         .zf_disabled { pointer-events: none; }
         /*搜索框6*/
-        .bar6 {background: #F9F0DA;}
+        .bar6 {
+            background: #F9F0DA;
+            display: flex;
+            justify-content: center;
+            width: 12em;
+            height: 1.5em;
+            margin-left: 3em;
+        }
         .bar6 input {
-            border: 2px solid #c5464a;
+            border: 1px solid #c5464a;
             border-radius: 5px;
             background: transparent;
-            top: 0;
-            right: 0;
+            /*top: 0;*/
+            /*right: 0;*/
         }
         .bar6 button {
             background: #c5464a;
             border-radius: 0 5px 5px 0;
-            width: 60px;
-            top: 0;
-            right: 0;
+            width: 5em;
+            /*top: 0;*/
+            /*right: 0;*/
         }
         .bar6 button:before {
             content: "搜索";
-            font-size: 13px;
+            font-size: 0.5em;
             color: #F9F0DA;
         }
         #mmmna{
-            width: 125px;
+            width: 9em;
+            height: 1.5em;
+            line-height: 1.5em;
         }
         /*滚动条*/
         #socketMessage::-webkit-scrollbar {
@@ -67,17 +76,40 @@
             border-radius: 10px;
         }
         #socketMessage {
-            overflow-y: scroll;
+            overflow-y:auto !important;
+            /*overflow-y: scroll;*/
             scrollbar-color: transparent transparent;
             scrollbar-track-color: transparent;
             -ms-scrollbar-track-color: transparent;
+            margin-top: -1em;
+            /*height: 20em;*/
+            color: #FF69B4 !important;
+            height: 600px;
         }
         /*#sakura{width: 100%;height: 100%}*/
         #cake{
-            margin-bottom: -2em;
+            margin-top: -3em;
             width: 100%;
             display: flex;
             justify-content: center;
+        }
+        .pagination-outer{clear: both;}
+        .pagination{display: inline-flex;justify-content: center}
+        #fenye_box {
+            /*display: none;*/
+            width: 17em;
+            margin-bottom: -0.4em !important;
+        }
+        .sh_wz{
+            color: #FF1493;display: flex;justify-content: center;
+            margin: -3.5em 0 -1em 0;
+        }
+        .sh_wz h1{font-size: 1.3em;}
+        #enabled_num{font-size: 0.5em;color: #df3dce}
+        a{text-decoration: none;}
+        .total_msg{
+            color: red;margin-bottom: 10px;
+            font-size: 0.5em;
         }
     </style>
     <!--    <link rel="stylesheet" th:href="@{css/sakura_style.css}" type="text/css" />-->
@@ -92,9 +124,32 @@
 <!-- 音乐播放器 -->
 <div id="QPlayer">
     <div class="body">
-        <div class="search bar6" style="margin-left: 15px;width: 190px">
+        <div class="search bar6">
             <input type="text" placeholder="歌曲名..." value="山楂树之恋" id="mmmna">
             <button id="serchMU" type="submit"></button>
+        </div>
+        <!-- 分页 -->
+        <div id="fenye_box" >
+            <nav class="pagination-outer" style="display: flex;justify-content: center" aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a href="#" class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><input type="text" id="yeshu_num" value="1" /></li>
+                    <li class="page-item">
+                        <a href="#" class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" id="to_page_mm">
+                        <a href="#" class="page-link" aria-label="go" style="width: 5em">
+                            <span aria-hidden="true">go</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div class="player">
             <span class="cover">
@@ -128,31 +183,6 @@
         </div>
     </div>
     <div class="more">
-        <div class="htmleaf-container">
-            <div class="demo" style="min-height: 300px;">
-                <div class="container">
-                    <div class="row pad-15">
-                        <div class="col-md-12">
-                            <nav class="pagination-outer" aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><input type="text" id="yeshu_num" value="1" /></li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <ol id="songLI" class="list"></ol>
         <div class="lyric"><ol></ol></div>
     </div>
@@ -168,8 +198,9 @@
     <div class="fuego"></div>
     <div class="fuego"></div>
 </div>
+<!-- 弹幕 -->
+<div id="wrapper"></div>
 <!-- 蛋糕动画 -->
-<div id="wrapper" style="display: flow;"></div>
     <div id="divcake">
         <svg id="cake" version="1.1" x="0px" y="0px" height="500px" viewBox="0 0 200 500"
              enable-background="new 0 0 200 500" xml:space="preserve">
@@ -330,12 +361,10 @@
 </svg>
     </div>
 
-<div style="color: #FF1493;display: flex;justify-content: center;font-size: 1em">
-    <h1>happy birthday!</h1>
-    <h1>妹子~</h1>
+<div class="sh_wz" >
+    <h1>happy birthday!   妹子~</h1>
 </div>
 <div class="text">
-    
     <!-- 聊天 -->
     <div class="liaotian" style="margin-top: 5px;display: flow;">
         <div style="display: flex;justify-content:center;justify-items: center">
@@ -343,7 +372,7 @@
             <button class="sendbtn">发&nbsp;&nbsp;送</button>
                 <!--            <button id="fullBtn" class="sendbtn">全&nbsp;&nbsp;屏</button>-->
         </div>
-        <p style="color: red;margin-bottom: 10px">总入场次数<span id="into_num">0</span>，前来祝贺的有<span id="peo_num">0</span>人，共送出了<span
+        <p class="total_msg">总入场次数<span id="into_num">0</span>，前来祝贺的有<span id="peo_num">0</span>人，共送出了<span
                 id="send_zfnum">0</span>份祝福！！！</p>
         <div class="zhujue">
             <span class="zhujuebtn">
@@ -366,9 +395,9 @@
                         <div class="paw-effect">
                             <div></div>
                         </div>
-                        <svg class="paw-clap">
+                        <!--<svg class="paw-clap">
                             <use xlink:href="#paw-clap"/>
-                        </svg>
+                        </svg>-->
                     </div>
                 </a>
                 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -416,12 +445,19 @@
     <div id="socketMessage"></div>
 </div>
 <script th:src="@{js/common.js}"></script>
+<script th:src="@{js/checkpc_moile.js}"></script>
 <!-- 右边小人 -->
 <!--<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>-->
 <!--<script th:src="@{js/cw_right.js}"></script>-->
 <script type="text/javascript">
     var username = '[[${session.username}]]';
     $(function () {
+        if (jQuery.browser.mobile) {
+            document.getElementById("socketMessage").style.height = "16em";
+        } else {
+            document.getElementById("socketMessage").style.height = "600px";
+        }
+            // console.log(document.getElementById("socketMessage").style.height + "sadasd")
         if (username.indexOf("冲") != -1) {
             $(".chuibtn").hide();
             $(".fenbtn").hide();
@@ -490,13 +526,11 @@
         }
     }
 
-    var serverUrl = "://129.211.113.87:";
-    // var serverUrl = "://localhost:";
     var websocket = null;
     //判断当前浏览器是否支持WebSocket, 主要此处要更换为自己的地址
     if ('WebSocket' in window) {
-        // websocket = new WebSocket("ws" + serverUrl + "11203/birthday/server");
-        websocket = new WebSocket("ws://localhost:11203/birthday/server");
+        websocket = new WebSocket("ws://129.211.113.87:11203/birthday/server");
+        // websocket = new WebSocket("ws://localhost:11203/birthday/server");
         // websocket = new WebSocket("ws://192.168.0.102:11203/birthday/server");
     } else {
         alert('Not support websocket')
@@ -554,7 +588,7 @@
 
     //将消息显示在网页上
     function setMessageInnerHTML(innerHTML) {
-        document.getElementById('socketMessage').innerHTML += innerHTML + '<br/><br/>';
+        document.getElementById('socketMessage').innerHTML += innerHTML + '<br/>';
     }
 
     //关闭连接
@@ -585,12 +619,13 @@
                 wrapper.appendChild(dom);
                 // 初始化dom的位置 通过设置className
                 dom.className = 'right';
-                // dom.style.color = "black";
-                // dom.style.fontWeight = "normal";
-                dom.style.left = document.body.clientWidth + 'px';
+                // var hidedmw = document.body.clientWidth + 'px';
+                var hidedmw = document.body.offsetWidth + 'px';
+                dom.style.left = hidedmw;
+                // dom.style.width = '100px';
                 // DOM的通道是固定的 所以设置好top就不需要再改变了
                 // dom.style.top = j * 10 + 'px';
-                var dddumtop = ranNUm(20,150);
+                var dddumtop = ranNUm(10,170);
                 dom.style.top = dddumtop + 'px';
                 // 放入改通道的DOM池
                 doms.push(dom);
@@ -625,25 +660,26 @@
     var colors = ['block','red','white','yellow','blue','green'];
     var fontSizes = [14,16,18,20,22,24,26];
     function shootDanmu(dom, text, channel) {
+        dom.className = 'left';
         dom.innerText = text;
         // 如果为每个弹幕设置 transition 可以保证每个弹幕的速度相同 这里没有保证速度相同
         // dom.style.transition = 'transform ${15 + dom.clientWidth / 100}s linear';
-        // dom.style.fontSize = "16px";
         // dom.style.left = '-' + dom.clientWidth + 'px';
         dom.style.color = colors[ranNUm(0,colors.length - 1)];
-
-        // dom.style.left = dom.clientWidth + 'px';
-        dom.style.left = dom.offsetWidth + 'px';
-        // console.log( dom.style.left + "aaaaaa")
         dom.style.fontSize = fontSizes[ranNUm(0,fontSizes.length - 1)] + 'px';
         // 设置弹幕的位置信息 性能优化 left -> transform
-        dom.style.transform = 'translateX(${-dom.clientWidth}px)';
-        // dom.style.transform = 'translateX(-200px)';
-        dom.className = 'left';
-        hasPosition[channel] = true;
+        // dom.style.transform = 'translateX(${-dom.clientWidth}px)';
+        // dom.style.transform = 'translateX(${-document.body.offsetWidth}px)';
+        let con=document.createElement("canvas").getContext("2d");
+        // con.font="bold 16px -apple-system";//自己需要的字体什么的
+        con.font=dom.style.fontSize;//自己需要的字体什么的
+        var wod_w = con.measureText(text).width;
+        var trans_w = '-' + (document.body.offsetWidth + wod_w) + 'px';
+        dom.style.transform = 'translateX(' + trans_w + ')';
+        // hasPosition[channel] = true;
         // 弹幕全部显示之后 才能开始下一条弹幕
         // 大概 dom.clientWidth * 10 的时间 该条弹幕就从右边全部划出到可见区域 再加1秒保证弹幕之间距离
-        hasPosition[channel] = true;
+        // hasPosition[channel] = true;
         setTimeout(() => {
             hasPosition[channel] = true;
         }, dom.clientWidth * 1 + 1000);

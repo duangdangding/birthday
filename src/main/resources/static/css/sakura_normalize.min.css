@@ -21,11 +21,6 @@ menu, article, aside, details, footer, header, nav, section {
     display: block
 }
 
-/*h1 {
-    font-size: 1em;
-    margin: 0.67em 0
-}*/
-
 figcaption, figure, main {
     display: block
 }

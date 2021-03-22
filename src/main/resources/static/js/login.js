@@ -16,6 +16,7 @@ $('#login-button').click(function (event) {
 				location.href = "/toindex";
 			}, 2000);
 		});
+		$('.form').fadeIn(1500);
 	} 
 });
 $("#userName").keydown(function (event) {

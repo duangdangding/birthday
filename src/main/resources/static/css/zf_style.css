@@ -27,10 +27,10 @@
   text-decoration: none;
   font-weight: bold;
   position: relative;
-  line-height: 19px;
-  padding: 5px 5px;
-  width: 6.3em;
-  height: 2em;
+  line-height: 1.3em;
+  padding: 2px 2px;
+  width: 5.6em;
+  height: 1.5em;
 }
 .paw-button:before {
   content: '';

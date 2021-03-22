@@ -1,8 +1,10 @@
-.pagination-outer{ text-align: center; }
 .pagination{
   font-family: 'Oxygen', sans-serif;
-  display: inline-flex;
+  /*display: inline-flex;*/
   position: relative;
+  margin: 0 !important;
+  padding: 0;
+  background-color: white;
 }
 .pagination li a.page-link{
   color: #e44251;
@@ -69,12 +71,9 @@
   }
   .pagination li a.page-link{ margin: 0; }
 }
-.htmleaf-container{
+/*.htmleaf-container{
   margin: 0 auto;
-}
-.page-item{
-  /*width: 30px;*/
-}
+}*/
 #yeshu_num{
   border: 1px solid #c5464a;
   border-radius: 5px;
