@@ -1,0 +1,87 @@
+.pagination-outer{ text-align: center; }
+.pagination{
+  font-family: 'Oxygen', sans-serif;
+  display: inline-flex;
+  position: relative;
+}
+.pagination li a.page-link{
+  color: #e44251;
+  background-color: transparent;
+  font-size: 0.5em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 0.5em;
+  height: 2.5em;
+  width: 0.5em;
+  margin: 0 0.1em;
+  border: 1px solid #c5464a;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s ease 0s;
+}
+.pagination li.active a.page-link,
+.pagination li a.page-link:hover,
+.pagination li.active a.page-link:hover{
+  color: #fff ;
+  background-color: #e44251;
+  border-color: #e44251;
+}
+.pagination li a.page-link:before,
+.pagination li a.page-link:after{
+  content: '';
+  background-color: #e44251;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  transform: scale(0) rotateX(360deg);
+  position: absolute;
+  left:0 ;
+  top: 0;
+  z-index: -1;
+  transition: all 0.3s;
+}
+.pagination li a.page-link:after{
+  background-color: transparent;
+  border-radius: 0;
+  transform: scale(0.7);
+  transition-delay: 0.1s;
+}
+.pagination li a.page-link:hover:before{
+  border-radius: 0;
+  transform: scale(1) rotateX(0);
+}
+.pagination li a.page-link:hover:after{
+  background-color: #e44251;
+  opacity: 0;
+  transform: scale(1.5);
+}
+@media only screen and (max-width: 480px){
+  .pagination{
+    display: block;
+    border-radius: 20px;
+  }
+  .pagination li{
+    /*margin: 5px 2px;*/
+    display: inline-block;
+    width: 25px;
+  }
+  .pagination li a.page-link{ margin: 0; }
+}
+.htmleaf-container{
+  margin: 0 auto;
+}
+.page-item{
+  /*width: 30px;*/
+}
+#yeshu_num{
+  border: 1px solid #c5464a;
+  border-radius: 5px;
+  background: transparent;
+  top: 0;
+  right: 0;
+  width: 2em;
+  line-height: 1.5em;
+  height: 1.5em;
+}

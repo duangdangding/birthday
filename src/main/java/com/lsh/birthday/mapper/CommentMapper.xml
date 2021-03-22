@@ -9,7 +9,7 @@
     </select>
     
     <insert id="addComm" parameterType="com.lsh.birthday.entry.Comment">
-        insert into comment (context) values (#{context,jdbcType=VARCHAR})
+        insert into comment (context,createtime) values (#{context,jdbcType=VARCHAR},#{createtime})
     </insert>
 
 </mapper>

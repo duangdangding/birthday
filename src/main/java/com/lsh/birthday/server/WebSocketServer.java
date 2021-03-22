@@ -102,7 +102,7 @@ public class WebSocketServer {
             logger.info("添加数据库内容:" + comment);
             //        log.info("服务端收到客户端[{}]的消息:{}", session.getId(), message);
             if (message.indexOf("cmd_") != -1) {
-                String dong = message.split("cmd_")[1];
+//                String dong = message.split("cmd_")[1];
                 /*if ("getCount".equals(dong)) {
                     message = message + "_" + onlineCount;
                 } else */
@@ -136,8 +136,8 @@ public class WebSocketServer {
 
     @OnError
     public void onError(Session session, Throwable error) {
-        error.printStackTrace();
-//        logger.error(error.getMessage());
+//        error.printStackTrace();
+        logger.error("onError : {}",error.getMessage());
     }
 
     /**
@@ -148,7 +148,7 @@ public class WebSocketServer {
 //            log.info("服务端给客户端[{}]发送消息{}", toSession.getId(), message);
             toSession.getBasicRemote().sendText(message);
         } catch (Exception e) {
-//            log.error("服务端发送消息给客户端失败：{}", e);
+            logger.error("服务端发送消息给客户端失败：{}", e.getMessage());
         }
     }
 }
