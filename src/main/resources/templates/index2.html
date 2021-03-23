@@ -109,7 +109,7 @@
             background-color: white;
             display: inline-flex;
             /*justify-content: center;*/
-            width: 8.9em;
+            width: 8.7em;
         }
         #fenye_box {
             /*display: none;*/
@@ -595,8 +595,8 @@
     var websocket = null;
     //判断当前浏览器是否支持WebSocket, 主要此处要更换为自己的地址
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://129.211.113.87:11203/birthday/server");
-        // websocket = new WebSocket("ws://localhost:11203/birthday/server");
+        // websocket = new WebSocket("ws://129.211.113.87:11203/birthday/server");
+        websocket = new WebSocket("ws://localhost:11203/birthday/server");
         // websocket = new WebSocket("ws://192.168.0.102:11203/birthday/server");
     } else {
         alert('Not support websocket')
