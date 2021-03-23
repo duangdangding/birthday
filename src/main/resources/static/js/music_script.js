@@ -48,7 +48,6 @@ window.QPlayer = {
 	});
 })(QPlayer);
 $(function () {
-
 	/**
 	 * 鼠标点击进度
 	 *
@@ -565,7 +564,11 @@ $(function () {
 
 	$listBtn.click(function () {
 		if (q.list.length > 0) {
-			$("#fenye_box").show();
+			if ($("#fenye_box").is(':hidden')) {
+				$("#fenye_box").show();
+			} else {
+				$("#fenye_box").hide();
+			}
 		}
 		$more.toggleClass('list-show');
 	});

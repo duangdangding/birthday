@@ -4,13 +4,10 @@ document.querySelectorAll('.paw-button').forEach(elem => {
         // $("#pinkboard").attr("class","xin_show");
         if(!elem.classList.contains('animation')) {
             elem.classList.add('animation');
-            
             setTimeout(() => {
-                setTimeout(() => {
-                    elem.classList.remove('animation', 'liked', 'confetti');
-                    // $("#pinkboard").removeAttr("class");
-                }, 600);
-            }, 260);
+                elem.classList.remove('animation', 'liked', 'confetti');
+                // $("#pinkboard").removeAttr("class");
+            }, 600);
         }
         e.preventDefault();
     });

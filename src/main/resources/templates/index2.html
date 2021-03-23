@@ -94,7 +94,23 @@
             justify-content: center;
         }
         .pagination-outer{clear: both;}
-        .pagination{display: inline-flex;justify-content: center}
+        .pagination li{
+            /*margin: 5px 2px;*/
+            display: inline-block;
+            width: 25px;
+        }
+        .pagination li a.page-link{ margin: 0; }
+        .pagination{
+            border-radius: 20px;
+            font-family: 'Oxygen', sans-serif;
+            position: relative;
+            margin: 0 !important;
+            padding: 0 -0.2em 0 0;
+            background-color: white;
+            display: inline-flex;
+            /*justify-content: center;*/
+            width: 8.9em;
+        }
         #fenye_box {
             /*display: none;*/
             width: 17em;
@@ -110,6 +126,14 @@
         .total_msg{
             color: red;margin-bottom: 10px;
             font-size: 0.5em;
+        }
+        .lazhus {
+            display: flex;
+            justify-content: center;
+        }
+        .page-item{
+            margin: 0 0.1em;
+            padding: 0 0 0 -0.5em;
         }
     </style>
     <!--    <link rel="stylesheet" th:href="@{css/sakura_style.css}" type="text/css" />-->
@@ -191,12 +215,51 @@
 <!-- 背景樱花 -->
 <canvas id="sakura"></canvas>
 <!-- 蜡烛 -->
-<div class="velas">
-    <div class="fuego"></div>
-    <div class="fuego"></div>
-    <div class="fuego"></div>
-    <div class="fuego"></div>
-    <div class="fuego"></div>
+<div class="lazhus">
+    <div style="width: 6.5em;margin: 3em 0 -5.3em 0;">
+        <div class="velas">
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+        </div>
+        <div class="velas">
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+        </div>
+        <div class="velas">
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+        </div>
+        <div class="velas">
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+        </div>
+        <div class="velas">
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+        </div>
+        <div class="velas">
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+            <div class="fuego"></div>
+        </div>
+    </div>
 </div>
 <!-- 弹幕 -->
 <div id="wrapper"></div>
@@ -362,7 +425,7 @@
     </div>
 
 <div class="sh_wz" >
-    <h1>happy birthday!   妹子~</h1>
+    <h1>happy birthday!   <span id="h_honey"></span>~</h1>
 </div>
 <div class="text">
     <!-- 聊天 -->
@@ -451,11 +514,14 @@
 <!--<script th:src="@{js/cw_right.js}"></script>-->
 <script type="text/javascript">
     var username = '[[${session.username}]]';
+    var honey = '[[${session.honey}]]';
     $(function () {
+        $("#h_honey").html(honey);
+        $("#fenye_box").hide();
         if (jQuery.browser.mobile) {
             document.getElementById("socketMessage").style.height = "16em";
         } else {
-            document.getElementById("socketMessage").style.height = "600px";
+            document.getElementById("socketMessage").style.height = "570px";
         }
             // console.log(document.getElementById("socketMessage").style.height + "sadasd")
         if (username.indexOf("冲") != -1) {
@@ -576,6 +642,9 @@
         }
         setMessageInnerHTML(showMSG);
         danmuPool.push(showMSG);
+        $('#socketMessage').animate({
+            scrollTop: $('#socketMessage').get(0).scrollHeight
+        }, 100);
     }
     //连接关闭的回调方法
     websocket.onclose = function () {

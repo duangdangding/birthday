@@ -32,7 +32,7 @@ body:-webkit-full-screen {
 #divcake {
   /*position: static;*/
   /*margin: -36em auto -2em auto;*/
-  margin-top: -20em;
+  margin-top: -21em;
   margin-bottom: 1em;
   z-index: 999;
   display: flex;
@@ -51,10 +51,10 @@ body:-webkit-full-screen {
 .velas {
   background: #ffffff;
   border-radius: 10px;
-  position: absolute;
-  top: 53px;
-  left: 50%;
-  margin-left: -2.5px;
+  /*position: absolute;*/
+  /*top: 53px;*/
+  /*left: 50%;*/
+  /*margin-left: -2.5px;*/
   /*margin-top: -8.33333333px;*/
   width: 5px;
   height: 35px;
@@ -66,6 +66,8 @@ body:-webkit-full-screen {
   backface-visibility: hidden;
   -webkit-animation: in 500ms 5s ease-out forwards;
   animation: in 500ms 5s ease-out forwards;
+  float: left;
+  margin: 0 5px;
 }
 
 .velas:after,
@@ -228,13 +230,46 @@ body:-webkit-full-screen {
 }
 
 /*左侧侧滑动小人*/
-.spig {display:block;width:50px;height:70px;position:absolute;bottom: 15em;left:180px;z-index:9999;}
-#message{color :#191919;border: 1px solid #c4c4c4;background:#ddd;-moz-border-radius:5px;-webkit-border-radius:5px;
-  border-radius:5px;min-height:1em;padding:5px;top:-45px;position:absolute;text-align:center;width:auto !important;
-  z-index:1000;-moz-box-shadow:0 0 15px #eeeeee;-webkit-box-shadow:0 0 15px #eeeeee;min-width: 1em;
-  box-shadow:0 0 15px #eeeeee;outline:none;font-size:0.8rem}
-.mumu{width:9rem;height:14rem;cursor: move;background:url(/img/chong.gif) no-repeat;
-  background-size:50% 50%}
+.spig {
+  display: block;
+  width: 3.3em;
+  height: 5em;
+  position: absolute;
+  bottom: 15em;
+  /*left: 4em !important;*/
+  z-index: 9999;
+}
+
+#message {
+  color: #191919;
+  border: 1px solid #c4c4c4;
+  background: #ddd;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  min-height: 1em;
+  padding: 3px;
+  top: -3em;
+  left: -7em;
+  position: absolute;
+  text-align: center;
+  width: 20em !important;
+  z-index: 1000;
+  -moz-box-shadow: 0 0 15px #eeeeee;
+  -webkit-box-shadow: 0 0 15px #eeeeee;
+  min-width: 1em;
+  box-shadow: 0 0 15px #eeeeee;
+  outline: none;
+  font-size: 0.8rem
+}
+
+.mumu {
+  width: 9rem;
+  height: 14rem;
+  cursor: move;
+  background: url(/img/chong.gif) no-repeat;
+  background-size: 50% 50%
+}
 
 .liaotian input {
   -webkit-appearance: none;

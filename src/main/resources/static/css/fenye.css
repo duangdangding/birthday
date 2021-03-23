@@ -1,11 +1,3 @@
-.pagination{
-  font-family: 'Oxygen', sans-serif;
-  /*display: inline-flex;*/
-  position: relative;
-  margin: 0 !important;
-  padding: 0;
-  background-color: white;
-}
 .pagination li a.page-link{
   color: #e44251;
   background-color: transparent;

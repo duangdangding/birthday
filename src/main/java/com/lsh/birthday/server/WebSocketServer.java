@@ -16,11 +16,11 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
-import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
@@ -31,8 +31,13 @@ public class WebSocketServer {
 
     /** 记录当前在线连接数 */
     private static AtomicInteger onlineCount = new AtomicInteger(0);
+//    @Autowired
+//    public TerminalService terminalServiceInWebSocket;
+
+    private static CopyOnWriteArraySet<WebSocketServer> sessions = new CopyOnWriteArraySet<WebSocketServer>();
+    private  Session session;
     //线程安全的Map  
-    private static ConcurrentHashMap<String,Session> webSocketMap = new ConcurrentHashMap<>();
+//    private static ConcurrentHashMap<String,Session> webSocketMap = new ConcurrentHashMap<>();
     private HttpSession httpSession ;
 
     private static RedisUtil redisUtil_wr;
@@ -56,7 +61,9 @@ public class WebSocketServer {
         onlineCount.incrementAndGet(); // 在线数加1
         httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         String username = (String) httpSession.getAttribute("username");
-        webSocketMap.put(username,session);
+        this.session = session;
+        sessions.add(this);
+//        webSocketMap.put(username,session);
         if (!redisUtil_wr.hasKey("into_num")) {
             redisUtil_wr.set("into_num",0);
         }
@@ -79,7 +86,23 @@ public class WebSocketServer {
         } catch (IllegalStateException e) {
 
         }
+        sessions.remove(this);
 //        log.info("有一连接关闭：{}，当前在线人数为：{}", session.getId(), onlineCount.get());
+    }
+    public static void sendUserLocal(String clientInfoJson) {
+        try {
+            if (sessions.size() != 0) {
+                for (WebSocketServer s : sessions) {
+                    if (s != null) {
+                        // 判断是否为终端信息。如果是终端信息则查询数据库获取detail
+                        s.session.getBasicRemote().sendText(clientInfoJson);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -128,9 +151,10 @@ public class WebSocketServer {
                 message = username + "：" + message;
             }
             logger.info("开始发送消息："+message);
-            for(String user:webSocketMap.keySet()) {
+            sendUserLocal(message);
+            /*for(String user:webSocketMap.keySet()) {
                 this.sendMessage(message, webSocketMap.get(user));
-            }
+            }*/
         }
     }
 
