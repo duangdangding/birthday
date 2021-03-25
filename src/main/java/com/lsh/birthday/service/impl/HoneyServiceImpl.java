@@ -6,8 +6,6 @@ import com.lsh.birthday.service.HoneyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class HoneyServiceImpl implements HoneyService {
 
@@ -22,7 +20,6 @@ public class HoneyServiceImpl implements HoneyService {
     @Override
     public int update(String hName) {
         Honey honey = new Honey(1,hName);
-        int i = honeyMapper.updateById(honey);
-        return i;
+        return honeyMapper.update(honey);
     }
 }

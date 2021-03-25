@@ -1,8 +1,9 @@
 package com.lsh.birthday.entry;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Comment {
+public class Comment implements Serializable {
     
     private Long commentId;
     private String context;

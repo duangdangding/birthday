@@ -1,6 +1,8 @@
 package com.lsh.birthday.controller;
 
+import com.lsh.birthday.entry.Common;
 import com.lsh.birthday.entry.Honey;
+import com.lsh.birthday.service.CommonService;
 import com.lsh.birthday.service.HoneyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,9 @@ public class PageCtr {
     @Autowired
     private HoneyService honeyService;
     
+    @Autowired
+    private CommonService commonService;
+    
     @RequestMapping("/tologin")
     public String toLogin(HttpSession session) {
         return "login";
@@ -27,6 +32,11 @@ public class PageCtr {
     public String toIndex(HttpSession session) {
         Honey honey = honeyService.find();
         session.setAttribute("honey",honey.gethName());
+        Common common = new Common();
+        common.setEnabled(1);
+        common.setKey("websocket_ip");
+        Common result = commonService.getByEnabled(common);
+        session.setAttribute("websocket_ip",result.getValue());
         return "index2";
     }
     

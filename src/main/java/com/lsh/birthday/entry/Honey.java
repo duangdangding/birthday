@@ -1,6 +1,8 @@
 package com.lsh.birthday.entry;
 
-public class Honey {
+import java.io.Serializable;
+
+public class Honey implements Serializable {
     private int hId;
     private String hName;
     

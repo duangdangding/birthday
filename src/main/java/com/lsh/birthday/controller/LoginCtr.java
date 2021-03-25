@@ -3,12 +3,14 @@ package com.lsh.birthday.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.lsh.birthday.utils.RedisUtil;
+import com.lsh.birthday.utils.ip.IPHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +24,7 @@ public class LoginCtr {
     private RedisUtil redisUtil;
     
     @RequestMapping("/login")
-    public String toLogin( String username, HttpSession session) {
+    public String toLogin(String username, HttpSession session, HttpServletRequest request) {
         if (!StrUtil.hasEmpty(username)) {
             int length = username.length();
             if (length > 20) {
@@ -37,6 +39,7 @@ public class LoginCtr {
         } else {
             username = "无名氏";
         }
+        String ipAddr = IPHelper.getIpAddr(request);
         
         session.setAttribute("username",username);
         return username;

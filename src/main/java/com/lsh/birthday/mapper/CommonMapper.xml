@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lsh.birthday.mapper.CommonMapper">
+
+    <!-- 查找信息 -->
+    <select id="getByEnabled" resultType="com.lsh.birthday.entry.Common" parameterType="com.lsh.birthday.entry.Common">
+        select * from common where key = #{key} and enabled = #{enabled}
+    </select>
+    
+    <update id="updateById" parameterType="com.lsh.birthday.entry.Common">
+        update common set enabled = #{enabled} where id = #{id}
+    </update>
+    
+    <update id="updateByKey" parameterType="com.lsh.birthday.entry.Common">
+        update common set enabled = #{enabled} where key = #{key}
+    </update>
+    
+</mapper>
