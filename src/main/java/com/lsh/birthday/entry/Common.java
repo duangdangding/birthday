@@ -4,40 +4,40 @@ import java.io.Serializable;
 
 public class Common implements Serializable {
     
-    private int id;
-    private String key;
-    private String value;
-    private int enabled;
+    private int coId;
+    private String coKey;
+    private String coValue;
+    private int coEnabled;
 
-    public int getId() {
-        return id;
+    public int getCoId() {
+        return coId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCoId(int coId) {
+        this.coId = coId;
     }
 
-    public String getKey() {
-        return key;
+    public String getCoKey() {
+        return coKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setCoKey(String coKey) {
+        this.coKey = coKey;
     }
 
-    public String getValue() {
-        return value;
+    public String getCoValue() {
+        return coValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setCoValue(String coValue) {
+        this.coValue = coValue;
     }
 
-    public int getEnabled() {
-        return enabled;
+    public int getCoEnabled() {
+        return coEnabled;
     }
 
-    public void setEnabled(int enabled) {
-        this.enabled = enabled;
+    public void setCoEnabled(int coEnabled) {
+        this.coEnabled = coEnabled;
     }
 }

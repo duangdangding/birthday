@@ -5,15 +5,15 @@
 
     <!-- 查找信息 -->
     <select id="getByEnabled" resultType="com.lsh.birthday.entry.Common" parameterType="com.lsh.birthday.entry.Common">
-        select * from common where key = #{key} and enabled = #{enabled}
+        select * from common where co_key = #{coKey} and co_enabled = #{coEnabled}
     </select>
     
     <update id="updateById" parameterType="com.lsh.birthday.entry.Common">
-        update common set enabled = #{enabled} where id = #{id}
+        update common set co_enabled = #{coEnabled} where co_id = #{coId}
     </update>
     
     <update id="updateByKey" parameterType="com.lsh.birthday.entry.Common">
-        update common set enabled = #{enabled} where key = #{key}
+        update common set co_enabled = #{coEnabled} where co_key = #{coKey}
     </update>
     
 </mapper>

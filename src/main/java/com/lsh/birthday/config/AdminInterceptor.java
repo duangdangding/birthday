@@ -1,5 +1,7 @@
 package com.lsh.birthday.config;
 
+import cn.hutool.core.util.ObjectUtil;
+import com.lsh.birthday.entry.UserMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -21,8 +23,8 @@ public class AdminInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 //        try {
         //统一拦截（查询当前session是否存在user）(这里user会在每次登陆成功后，写入session)
-        String username = (String) request.getSession().getAttribute("username");
-        if(!StringUtils.isEmpty(username)){
+        UserMsg user = (UserMsg) request.getSession().getAttribute("user");
+        if(!ObjectUtil.isEmpty(user)){
             return true;
         }
         try {

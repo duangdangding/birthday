@@ -8,12 +8,15 @@ public class Comment implements Serializable {
     private Long commentId;
     private String context;
     private Timestamp createtime;
+    private int userId;
+    private UserMsg userMsg;
     
     public Comment() {
     }
-    public Comment(String context,Timestamp createtime) {
+    public Comment(String context,int userId) {
         this.context = context;
-        this.createtime = createtime;
+//        this.createtime = createtime;
+        this.userId = userId;
     }
 
     public Long getCommentId() {
@@ -47,5 +50,21 @@ public class Comment implements Serializable {
                 ", context='" + context + '\'' +
                 ", createtime=" + createtime +
                 '}';
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public UserMsg getUserMsg() {
+        return userMsg;
+    }
+
+    public void setUserMsg(UserMsg userMsg) {
+        this.userMsg = userMsg;
     }
 }

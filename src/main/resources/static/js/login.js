@@ -6,6 +6,7 @@ $('#login-button').click(function (event) {
 			userName = userName.substring(0,20);
 		}
 		$.post("/login",{username:userName},function (res){
+			console.log('登录返回结果~'+JSON.stringify(res));
 			event.preventDefault();
 			$('.form').fadeOut(500);
 			$('.wrapper').addClass('form-success');

@@ -33,11 +33,16 @@ public class PageCtr {
         Honey honey = honeyService.find();
         session.setAttribute("honey",honey.gethName());
         Common common = new Common();
-        common.setEnabled(1);
-        common.setKey("websocket_ip");
+        common.setCoEnabled(1);
+        common.setCoKey("websocket_ip");
         Common result = commonService.getByEnabled(common);
-        session.setAttribute("websocket_ip",result.getValue());
+        session.setAttribute("websocket_ip",result.getCoValue());
         return "index2";
+    }
+    @RequestMapping("/tocommonts")
+    public String tocommonts() {
+        
+        return "comments";
     }
     
 }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 必须的 meta 标签 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://lib.baomitu.com/bootstrap-table/1.13.1/bootstrap-table.min.css">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS, and then Bootstrap Table JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.2/core.min.js"></script>
+    <script src="https://lib.baomitu.com/bootstrap-table/1.13.1/bootstrap-table.min.js"></script>
+    <script src="https://lib.baomitu.com/bootstrap-table/1.13.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入layer -->
+    <script type="text/javascript" src="https://lib.baomitu.com/layer/3.1.1/layer.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+ 		<section class="cont">
+ 		<table id="table"></table>
+ 		</section>
+ 		<div id="toolbar" class="btn-group">
+             <button id="btn_query" type="button" class="btn btn-default" >
+                 <span class="glyphicon glyphicon-pencil" aria-hidden="true">查询</span>
+             </button>
+         </div>
+ 	</div>
+</body>
+<script type="text/javascript">
+    $('#table').bootstrapTable({
+        // sortable:true,
+        //默认传入后台的排序字段,相当于给queryParams属性的回调函数的参数params.sort赋值
+        // sortName:'sortnum',
+        // sortOrder:'asc',
+        method:'get',
+        contentType:"application/x-www-form-urlencoded",
+        search:false,
+        dataType:"json",
+        pagination:true,//分页
+        sidePagination:"server",//服务端处理分页
+        pageNum:1,//默认显示第1页
+        pageSize:100,//页面默认显示多少条
+        pageList:[100,200,300],//可供选择的页面条数下拉框
+        // singleSelect:false,//可以多选
+        striped:true,//斑马线效果
+        showRefresh:true,//刷新按钮
+        showColumns:true,//可以勾选隐藏或显示特定列
+        clickToSelect:true,//是否启用点击选中行
+        // toolbar:'#toolbar',//自定义工具栏
+        /*每次调用bootstrapTable('refresh',{query:{键值对,会覆盖queryParams的回调函数中指定的同键参数}});
+            都会去请求url属性指定的地址，并传入这里面的参数*/
+        queryParams:function queryParams(params) {
+            return{
+                limit:params.limit,//即：pageSize
+                offset:params.offset,//即:(pageNumber-1)*pageSize,可用于分页
+                // otherparam:'其他参数的值',//传入后台的其他参数可在此设置
+                // sortOrder:params.order,//排序
+                // sortName:params.sort//排序字段
+            };
+        },
+        url:'/commAll',//后台地址
+        columns:[/*{
+            title:'全选',
+            field:'ck',
+            checkbox:true,
+            width:25,
+            align:'center',
+            valign:'middle'
+        },*/{
+            field:'commentId',
+            title:'序号',
+            // sortable:true//点击排序按钮传入后台对应的sortName和sortOrder,此处传入name和asc/desc
+        },{
+            field:'context',
+            title:'留言内容',
+            // sortable:true//点击排序按钮传入后台对应的sortName和sortOrder,此处传入name和asc/desc
+        },{
+            field:'createtime',
+            title:'留言时间',
+            // sortable:true//点击排序按钮传入后台对应的sortName和sortOrder,此处传入name和asc/desc
+        },{
+            field:'userName',
+            title:'姓名',
+            // sortable:true//点击排序按钮传入后台对应的sortName和sortOrder,此处传入name和asc/desc
+        },{
+            field:'userIp',
+            title:'IP',
+            // sortable:true//点击排序按钮传入后台对应的sortName和sortOrder,此处传入name和asc/desc
+        },{
+            field:'loginTime',
+            title:'登录时间',
+            // sortable:true//点击排序按钮传入后台对应的sortName和sortOrder,此处传入name和asc/desc
+        },{
+            field:'LoginSum',
+            title:'登录次数',
+            // sortable:true//点击排序按钮传入后台对应的sortName和sortOrder,此处传入name和asc/desc
+        }/*,{
+            field:'jump_link',
+            title:'跳转链接',
+            formatter:function(v,row,i){
+                return"<ahref='"+v+"'target='_blank'>打开链接</a>";
+            }
+        }*/],
+        onLoadSuccess: function(){
+            console.log("表格数据渲染成功");
+        }
+    });
+</script>
+</html>

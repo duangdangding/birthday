@@ -1,6 +1,7 @@
 package com.lsh.birthday.service.impl;
 
 import cn.hutool.db.PageResult;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,8 +22,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper,Comment> imple
     @Override
     public IPage<Comment> findAll(Integer page, Integer size) {
         Page<Comment> pageData = new Page<>(page,size);
-        pageData.setRecords(commentMapper.selectPage(pageData, null).getRecords());
-        return pageData;
+//        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+//        wrapper.orderByDesc("createtime");
+        IPage<Comment> commentIPage = commentMapper.selectByPage1(pageData);
+//        pageData.setRecords(commentMapper.selectPage(pageData, wrapper).getRecords());
+        return commentIPage;
     }
 
     @Override

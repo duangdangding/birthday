@@ -3,6 +3,7 @@ package com.lsh.birthday.server;
 import cn.hutool.core.util.StrUtil;
 import com.lsh.birthday.config.GetHttpSessionConfigurator;
 import com.lsh.birthday.entry.Comment;
+import com.lsh.birthday.entry.UserMsg;
 import com.lsh.birthday.mapper.CommentMapper;
 import com.lsh.birthday.utils.RedisUtil;
 import org.jsoup.Jsoup;
@@ -17,9 +18,6 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -35,9 +33,7 @@ public class WebSocketServer {
 //    public TerminalService terminalServiceInWebSocket;
 
     private static CopyOnWriteArraySet<WebSocketServer> sessions = new CopyOnWriteArraySet<WebSocketServer>();
-    private  Session session;
-    //线程安全的Map  
-//    private static ConcurrentHashMap<String,Session> webSocketMap = new ConcurrentHashMap<>();
+    private Session session;
     private HttpSession httpSession ;
 
     private static RedisUtil redisUtil_wr;
@@ -60,10 +56,10 @@ public class WebSocketServer {
     public void onOpen(Session session,EndpointConfig config) {
         onlineCount.incrementAndGet(); // 在线数加1
         httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
-        String username = (String) httpSession.getAttribute("username");
+//        String username = (String) httpSession.getAttribute("username");
+//        UserMsg user = (UserMsg) httpSession.getAttribute("user");
         this.session = session;
         sessions.add(this);
-//        webSocketMap.put(username,session);
         if (!redisUtil_wr.hasKey("into_num")) {
             redisUtil_wr.set("into_num",0);
         }
@@ -81,8 +77,9 @@ public class WebSocketServer {
     public void onClose(Session session) {
         onlineCount.decrementAndGet(); // 在线数减1
         try {
-            String username = (String) httpSession.getAttribute("username");
-            logger.info(username + "离开了~~~当前人数是" + onlineCount.get());
+//            String username = (String) httpSession.getAttribute("username");
+            UserMsg user = (UserMsg) httpSession.getAttribute("user");
+            logger.info(user.getUserName() + "离开了~~~当前人数是" + onlineCount.get());
         } catch (IllegalStateException e) {
 
         }
@@ -119,8 +116,10 @@ public class WebSocketServer {
             if (length > 500) {
                 message.substring(0,500);
             }
-            String username = (String) httpSession.getAttribute("username");
-            Comment comment = new Comment(username + "：" + message,new Timestamp(new Date().getTime()));
+//            String username = (String) httpSession.getAttribute("username");
+            UserMsg user = (UserMsg) httpSession.getAttribute("user");
+            String username = user.getUserName();
+            Comment comment = new Comment(username + "：" + message, + user.getUserId());
             Long aLong = commentMapper_bk.addComm(comment);
             logger.info("添加数据库内容:" + comment);
             //        log.info("服务端收到客户端[{}]的消息:{}", session.getId(), message);
@@ -164,15 +163,4 @@ public class WebSocketServer {
         logger.error("onError : {}",error.getMessage());
     }
 
-    /**
-     * 服务端发送消息给客户端
-     */
-    private void sendMessage(String message, Session toSession) {
-        try {
-//            log.info("服务端给客户端[{}]发送消息{}", toSession.getId(), message);
-            toSession.getBasicRemote().sendText(message);
-        } catch (Exception e) {
-            logger.error("服务端发送消息给客户端失败：{}", e.getMessage());
-        }
-    }
 }

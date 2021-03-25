@@ -3,13 +3,20 @@
 
 <mapper namespace="com.lsh.birthday.mapper.CommentMapper">
 
+    <resultMap id="commontMap" type="com.lsh.birthday.entry.Comment">
+        <id column="comment_id" property="commentId" />
+        <id column="context" property="context" />
+        <id column="createtime" property="createtime" />
+        <association property="userId" column="user_id" javaType="com.lsh.birthday.entry.UserMsg"
+            select="com.lsh.birthday.mapper.UserMsgMapper.findByUserId"/>
+    </resultMap>
     <!-- 查找信息 -->
-    <select id="findAll" resultType="com.lsh.birthday.entry.Comment">
-        select * from comment
+    <select id="selectByPage1" resultMap="commontMap">
+        select * from comment order by createtime desc
     </select>
     
     <insert id="addComm" parameterType="com.lsh.birthday.entry.Comment">
-        insert into comment (context,createtime) values (#{context,jdbcType=VARCHAR},#{createtime})
+        insert into comment (context,createtime,user_id) values (#{context,jdbcType=VARCHAR},now(),#{userId})
     </insert>
 
 </mapper>
