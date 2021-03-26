@@ -14,11 +14,11 @@
         select * from user_msg WHERE user_name = #{userName} and user_ip = #{userIp}
     </select>
     <update id="updateSum" parameterType="com.lsh.birthday.entry.UserMsg">
-        UPDATE user_msg SET login_sum = login_sum + 1,createtime = now() WHERE user_name = #{userName} and user_ip = #{userIp}
+        UPDATE user_msg SET login_sum = login_sum + 1 WHERE user_name = #{userName} and user_ip = #{userIp}
     </update>
-    <insert id="addUser" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id" parameterType="com.lsh.birthday.entry.UserMsg">
-        insert into user_msg (user_name,user_ip,login_time) values(
-            #{userName},#{userIp},now()
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="userId" parameterType="com.lsh.birthday.entry.UserMsg">
+        insert into user_msg (user_name,user_ip,login_time,user_address) values(
+            #{userName},#{userIp},now(),#{userAddress}
         )
     </insert>
     

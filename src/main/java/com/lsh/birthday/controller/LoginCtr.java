@@ -32,6 +32,15 @@ public class LoginCtr {
     
     @RequestMapping("/login")
     public ResultDto<String> toLogin(String username, HttpSession session, HttpServletRequest request) {
+        String url = request.getRequestURL().toString();
+//        ws://129.211.113.87:11203/birthday/server
+        String ip = "localhost";
+        if (!StrUtil.isEmpty(url)) {
+            String s = url.split(":")[1];
+            ip = s.substring(1);
+        }
+        String server = "ws://" + ip + ":11203/birthday/server";
+        session.setAttribute("websocket_ip",server);
         if (!StrUtil.hasEmpty(username)) {
             int length = username.length();
             if (length > 20) {
@@ -47,18 +56,24 @@ public class LoginCtr {
             username = "无名氏";
         }
         String ipAddr = IPHelper.getIpAddr(request);
+//        session.setAttribute("ip",ip1);
+        if ("0:0:0:0:0:0:0:1".equals(ipAddr) || "localhost".equals(ipAddr) || "127.0.0.1".equals(ipAddr)) {
+            ipAddr = IPHelper.getIp();
+        }
+//        http://ip.geo.iqiyi.com/cityjson?format=json&ip=61.153.252.254
         UserMsg userMsg = new UserMsg();
         userMsg.setUserName(username);
         userMsg.setUserIp(ipAddr);
+        String address = IPHelper.getAddressByIp(ipAddr);
+        userMsg.setUserAddress(address);
 //        判断是否存在相同的ip和名字
         UserMsg msg = userMsgService.findBynameip(userMsg);
         Integer res = 0;
         if (msg == null) {
             res = userMsgService.addUser(userMsg);
-            userMsg.setUserId(res);
             session.setAttribute("user",userMsg);
         } else {
-            res = userMsgService.updateSum(userMsg);
+            res = userMsgService.updateSum(msg);
             session.setAttribute("user",msg);
         }
         String result = "";

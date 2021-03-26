@@ -132,7 +132,12 @@
             margin: 0 0.1em;
             padding: 0 0 0 -0.5em;
         }
+        body{
+            cursor: url("/cursor/Arrow.cur"),default;
+        }
+        a:hover{url("/cursor/Help.cur"),default;}
     </style>
+    
     <!--    <link rel="stylesheet" th:href="@{css/sakura_style.css}" type="text/css" />-->
     <script th:src="@{js/jquery-3.8.min.js}"></script>
     <script th:src="@{js/jquery.marquee.min.js}"></script>
@@ -513,7 +518,9 @@
     var username = '[[${session.user.userName}]]';
     var honey = '[[${session.honey}]]';
     var websocket_ip = '[[${session.websocket_ip}]]';
+    var ip = '[[${session.ip}]]';
     $(function () {
+        console.log(ip)
         $("#h_honey").html(honey);
         $("#fenye_box").hide();
         if (jQuery.browser.mobile) {

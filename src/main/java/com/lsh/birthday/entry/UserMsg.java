@@ -9,7 +9,8 @@ public class UserMsg implements Serializable {
     private String userName;
     private String userIp;
     private Timestamp loginTime;
-    private int LoginSum;
+    private int loginSum;
+    private String userAddress;
 
     public int getUserId() {
         return userId;
@@ -44,10 +45,18 @@ public class UserMsg implements Serializable {
     }
 
     public int getLoginSum() {
-        return LoginSum;
+        return loginSum;
     }
 
     public void setLoginSum(int loginSum) {
-        LoginSum = loginSum;
+        this.loginSum = loginSum;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 }

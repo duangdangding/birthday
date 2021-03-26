@@ -1,6 +1,7 @@
 package com.lsh.birthday.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.lsh.birthday.entry.BootStrapResult;
 import com.lsh.birthday.entry.Comment;
 import com.lsh.birthday.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class CommentCtr {
     private CommentService commentService;
     
     @RequestMapping("/commAll")
-    public List<Comment> getAll(Integer offset, Integer limit, HttpServletRequest request) {
-        IPage<Comment> all = commentService.findAll(1, limit);
-        return all.getRecords();
+    public BootStrapResult<Comment> getAll(Integer pageNumber, Integer pageSize, HttpServletRequest request) {
+        IPage<Comment> all = commentService.findAll(pageNumber, pageSize);
+        return new BootStrapResult<Comment>(all.getRecords(),all.getTotal());
     }
 }
