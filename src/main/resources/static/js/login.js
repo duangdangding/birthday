@@ -5,6 +5,14 @@ $('#login-button').click(function (event) {
 		if (userLen > 20) {
 			userName = userName.substring(0,20);
 		}
+		$.post("/findBannad",{words:userName},function (data) {
+			if (data.result.bannad === 1) {
+				layer.ready(function(){
+					layer.msg('请文明入场');
+				});
+				return false;
+			}
+		})
 		$.post("/login",{username:userName},function (res){
 			console.log('登录返回结果~'+JSON.stringify(res));
 			event.preventDefault();

@@ -44,5 +44,9 @@ public class PageCtr {
         
         return "comments";
     }
+    @RequestMapping("/i/n/a/d/m/i/n/inAdmin")
+    public String toAdmin() {
+        return "admin";
+    }
     
 }

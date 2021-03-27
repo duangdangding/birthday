@@ -140,6 +140,8 @@
     
     <!--    <link rel="stylesheet" th:href="@{css/sakura_style.css}" type="text/css" />-->
     <script th:src="@{js/jquery-3.8.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" type="text/css" />
+    <script src="//res.layui.com/layui/dist/layui.js?t=1616653624947"></script>
     <script th:src="@{js/jquery.marquee.min.js}"></script>
     <script th:src="@{js/sakura_prefixfree.min.js}"></script>
     <script th:src="@{js/music_script.js}"></script>
@@ -781,6 +783,15 @@
             if (mLen > 200) {
                 message = message.substring(0, 200);
             }
+            $.post("/findBannad",{words:message},function (data) {
+                console.log(data.result.bannad)
+                if (data.result.bannad === 1) {
+                    layer.ready(function(){
+                        layer.msg('请文明用语哦~');
+                    });
+                    return false;
+                }
+            })
             websocket.send(message);
             $("#text").val("");
         }
