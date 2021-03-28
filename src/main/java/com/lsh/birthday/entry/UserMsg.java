@@ -11,6 +11,7 @@ public class UserMsg implements Serializable {
     private Timestamp loginTime;
     private int loginSum;
     private String userAddress;
+    private int userBg = 1;
 
     public int getUserId() {
         return userId;
@@ -59,4 +60,13 @@ public class UserMsg implements Serializable {
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
     }
+
+    public int getUserBg() {
+        return userBg;
+    }
+
+    public void setUserBg(int userBg) {
+        this.userBg = userBg;
+    }
+
 }

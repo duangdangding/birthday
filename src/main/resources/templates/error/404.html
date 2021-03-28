@@ -8,13 +8,23 @@
     <title>生日宴会</title>
     <meta name=keywords content="404页面">
     <meta name=description content="一万年太久，只争朝夕">
-    <link rel="stylesheet" th:href="@{404/main.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/404/main.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/heart/heart.css}" type="text/css" />
     <style>
         body{
             cursor: url("/cursor/Arrow.cur"),default;
+            background-size: cover !important;
+            position: absolute !important;
         }
         a:hover{url("/cursor/Help.cur"),default;}
+        .panel-cover__description{font-size: 0.8em;white-space:nowrap;}
+        
     </style>
+    <script th:src="@{/js/jquery-3.8.min.js}"></script>
+    
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/checkpc_moile.js}"></script>
+    <script th:src="@{/js/click_xin.js}" ></script>
 </head>
 <body>
 <header class="panel-cover" style="background-image: url(/404/img/1.jpg)">
@@ -38,9 +48,15 @@
     </div>
 </header>
 </body>
-<script th:src="@{js/common.js}"></script>
+
 <script type="text/javascript">
         var bgzz = document.getElementsByClassName("panel-cover")[0];
-        bgzz.style.backgroundImage = "url(/404/img/" + ranNUm(1,15) + ".jpg)";
+        if (jQuery.browser.mobile) {
+            // document.body.style.background = "url(/404/img/phone/" + ranNUm(1,28) + ".jpg) top left no-repeat";
+            bgzz.style.backgroundImage = "url(/404/img/phone/" + ranNUm(1,28) + ".jpg)";
+        } else {
+            bgzz.style.backgroundImage = "url(/404/img/" + ranNUm(1,50) + ".jpg)";
+            // document.body.style.background = "url(/404/img/" + ranNUm(1,50) + ".jpg) top left no-repeat";
+        }
 </script>
 </html>

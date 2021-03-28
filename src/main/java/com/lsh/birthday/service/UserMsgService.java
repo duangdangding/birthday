@@ -9,5 +9,7 @@ public interface UserMsgService {
     Integer addUser(UserMsg userMsg);
 
     UserMsg findBynameip(UserMsg userMsg);
+
+    int updateBg(UserMsg userMsg);
     
 }

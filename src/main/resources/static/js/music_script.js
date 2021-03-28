@@ -284,19 +284,20 @@ $(function () {
 								var index = obj.index();
 								$('#mussIMg').attr('src', simgs[index]);
 								q.play(index);
+								console.log(index)
 								q.history.push(index);
 							}
 						});
 						//触发监听事件
-						q.isRotate = q.isRotate;
-						q.isRandom = q.isRandom;
+						// q.isRotate = q.isRotate;
+						// q.isRandom = q.isRandom;
 						q.listIndex = -1;
 						q.histIndex = 0;
 						q.load(random());
 						q.history = [q.listIndex];
 						$list[0].scrollTop = $list.find('.current')[0].offsetTop - $list[0].offsetTop + 1;
 						if (q.isAuto){
-							$(".songss").eq(0).click();
+							// $(".songss").eq(0).click();
 							q.play(0);
 						}
 					}
@@ -313,8 +314,8 @@ $(function () {
 	 * @param int
 	 */
 	q.play = function (n) {
-		/*if (q.load(n))
-			return;*/
+		if (q.load(n))
+			return;
 		$player.addClass('playing');
 		if (isLoad) {
 			var id = q.current.id;

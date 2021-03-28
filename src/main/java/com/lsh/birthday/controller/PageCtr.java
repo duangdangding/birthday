@@ -2,8 +2,10 @@ package com.lsh.birthday.controller;
 
 import com.lsh.birthday.entry.Common;
 import com.lsh.birthday.entry.Honey;
+import com.lsh.birthday.entry.UserMsg;
 import com.lsh.birthday.service.CommonService;
 import com.lsh.birthday.service.HoneyService;
+import com.lsh.birthday.service.UserMsgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +18,6 @@ public class PageCtr {
     
     @Autowired
     private HoneyService honeyService;
-    
-    @Autowired
-    private CommonService commonService;
     
     @RequestMapping("/tologin")
     public String toLogin(HttpSession session) {

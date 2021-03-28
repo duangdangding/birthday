@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>生日宴会进行中！</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <!--    <title>祝妹子生日快乐！</title>-->
     <link rel="stylesheet" th:href="@{css/reset.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{css/style.css}" media="screen" type="text/css"/>
@@ -137,11 +137,13 @@
         }
         body{
             cursor: url("/cursor/Arrow.cur"),default;
+            background-size: cover !important;
+            position: absolute !important;
         }
         a:hover{url("/cursor/Help.cur"),default;}
         #he-plugin-simple{
             width: 12em;
-            position: absolute !important; 
+            position: absolute !important;
             right: 0;
         }
         .s-sticker{
@@ -153,9 +155,30 @@
             margin: 0;
             padding: 0 2px !important;
         }
-         
+        #yincangyh{
+            position: absolute;
+            background-color: #b6bbc0;
+            top: 0;
+            left: 0;
+            z-index: 9999999999;
+            border: 1px solid #a5a5a5 !important;
+            font: 0.5em Calibri, Arial, sans-serif;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+            text-decoration: none !important;
+            white-space: nowrap;
+            background-image: url(/img/button_bg.png), url(/img/button_bg.png), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(202,205,208,1)), to(rgba(202,205,208,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#d1d3d6), to(#9fa5a9));
+            vertical-align: baseline;
+            cursor: pointer;
+            /*padding: 10px 20px;*/
+            background-repeat: no-repeat;
+            background-clip: border-box;
+            border-radius: 8px;
+            box-shadow: 0 0 1px #fff inset;
+            transition: background-position 1s;
+            font-weight: bold;
+        }
     </style>
-    
+
     <!--    <link rel="stylesheet" th:href="@{css/sakura_style.css}" type="text/css" />-->
     <script th:src="@{js/jquery-3.8.min.js}"></script>
     <script th:src="@{/layui/layer.js}" ></script>
@@ -167,6 +190,8 @@
 </head>
 
 <body>
+<!--<a href="#" class="button small gray">Small Button</a>-->
+<button id="yincangyh"  title="如果卡的话可以隐藏樱花背景">隐藏樱花背景</button>
 <div id="he-plugin-simple"></div>
 <script>
     document.onmousemove = function(event){
@@ -328,9 +353,9 @@
 <!-- 弹幕 -->
 <div id="wrapper"></div>
 <!-- 蛋糕动画 -->
-    <div id="divcake">
-        <svg id="cake" version="1.1" x="0px" y="0px" height="500px" viewBox="0 0 200 500"
-             enable-background="new 0 0 200 500" xml:space="preserve">
+<div id="divcake">
+    <svg id="cake" version="1.1" x="0px" y="0px" height="500px" viewBox="0 0 200 500"
+         enable-background="new 0 0 200 500" xml:space="preserve">
     <path fill="#a88679" d="M173.667-13.94c-49.298,0-102.782,0-147.334,0c-3.999,0-4-16.002,0-16.002
 		c44.697,0,96.586,0,147.334,0C177.667-29.942,177.668-13.94,173.667-13.94z">
         <animate id="bizcocho_3" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1" begin="relleno_2.end"
@@ -346,7 +371,7 @@
 		c46.385,0,97.539,0,147.334,0C177.668,411.567,177.667,427.569,173.667,427.569z
                           "/>
     </path>
-            <path fill="#8b6a60" d="M100-178.521c1.858,0,3.364,1.506,3.364,3.363c0,0,0,33.17,0,44.227
+        <path fill="#8b6a60" d="M100-178.521c1.858,0,3.364,1.506,3.364,3.363c0,0,0,33.17,0,44.227
 		c0,19.144,0,57.431,0,76.574c0,10.152,0,40.607,0,40.607c0,1.858-1.506,3.364-3.364,3.364l0,0c-1.858,0-3.364-1.506-3.364-3.364c0,0,0-30.455,0-40.607c0-19.144,0-57.432,0-76.575c0-11.057,0-44.226,0-44.226C96.636-177.015,98.142-178.521,100-178.521
 		L100-178.521z">
         <animate id="relleno_2" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 0.58 1"
@@ -370,7 +395,7 @@
 		c0,0-4.125-4.983,0-7.823c5.201-3.58,16.085,0,23.725,0c8.841,0,20.762,0,20.762,0c3.686,0,8.597,0,19.511,0H102.242z
                           "/>
     </path>
-            <path fill="#a88679" d="M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
+        <path fill="#a88679" d="M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
 		c43.566,0,97.96,0,147.334,0C177.667-31.931,177.666-15.929,173.667-15.929z">
         <animate id="bizcocho_2" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0.25 0 0.58 1"
                  begin="relleno_1.end" dur="0.1s" fill="freeze" values="
@@ -387,7 +412,7 @@
 		c44.697,0,96.586,0,147.334,0C177.667,435.392,177.668,451.394,173.667,451.394z
                           "/>
     </path>
-            <path fill="#8b6a60" d="M101.368-73.685c0,12.164,0,15.18,0,28.519c0,22.702,0-13.661,0,8.304c0,14.48,0,18.233,0,30.512
+        <path fill="#8b6a60" d="M101.368-73.685c0,12.164,0,15.18,0,28.519c0,22.702,0-13.661,0,8.304c0,14.48,0,18.233,0,30.512
 		c0,1.753-2.958,1.847-2.958,0c0-12.68,0-16.277,0-30.401c0-21.983,0,11.66,0-8.305c0-13.027,0-15.992,0-28.628
 		C98.411-75.883,101.368-75.592,101.368-73.685z">
         <animate id="relleno_1" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 0.6 1"
@@ -409,7 +434,7 @@
 		c-4.109,0.65-3.01-10.006,0-10.006C37.129,451.394,149.379,451.394,173.667,451.394z
                           "/>
     </path>
-            <path fill="#a88679" d="M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
+        <path fill="#a88679" d="M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
 		C177.668,5.569,177.667,21.571,173.667,21.571z">
         <animate id="bizcocho_1" attributeName="d" calcMode="spline"
                  keySplines="0 0 1 1; 0 0 1 1; 0 0 1 1; 0.25 0 1 1; 0 0 1 1; 0.25 0 0.6 1" begin="2s" dur="0.1s"
@@ -436,7 +461,7 @@
 		C177.667,459.569,177.666,475.571,173.667,475.571z
                           "/>
     </path>
-            <path fill="#fefae9" d="M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
+        <path fill="#fefae9" d="M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
 	c0-5.143,0-15.427,0-20.568c0-7.333,0-21.998,0-29.33c0-5.523,0-16.569,0-22.092c0-3.295,0-9.885,0-13.181
 	C95.188,2.551,97.353,0,100,0c2.648,0,4.812,2.551,4.812,5.669c0,3.248,0,9.743,0,12.991c0,5.428,0,16.284,0,21.711
 	c0,7.618,0,22.854,0,30.472c0,4.952,0,14.854,0,19.807C104.812,96.292,104.812,107.576,104.812,113.216z">
@@ -484,9 +509,9 @@
 	c-7.606-0.447-6.058-37.895-20.62-23.333c-10.167,10.166-15.972-0.747-25,12C119.547,443.568,121.798,416.515,111.547,415.233z
                           "/>
     </path>
-            <rect x="10" y="475.571" fill="#fefae9" width="180" height="4"/>
+        <rect x="10" y="475.571" fill="#fefae9" width="180" height="4"/>
 </svg>
-    </div>
+</div>
 
 <div class="sh_wz" >
     <h1>happy birthday!   <span id="h_honey"></span>~</h1>
@@ -497,7 +522,7 @@
         <div style="display: flex;justify-content:center;justify-items: center">
             <input id="text" type="text" placeholder="送上祝福~~~(500字以内)" style=""/>
             <button class="sendbtn">发&nbsp;&nbsp;送</button>
-                <!--            <button id="fullBtn" class="sendbtn">全&nbsp;&nbsp;屏</button>-->
+            <!--            <button id="fullBtn" class="sendbtn">全&nbsp;&nbsp;屏</button>-->
         </div>
         <p class="total_msg">总入场次数<span id="into_num">0</span>，前来祝贺的有<span id="peo_num">0</span>人，共送出了<span
                 id="send_zfnum">0</span>份祝福！！！</p>
@@ -580,9 +605,15 @@
     var username = '[[${session.user.userName}]]';
     var honey = '[[${session.honey}]]';
     var websocket_ip = '[[${session.websocket_ip}]]';
-    var ip = '[[${session.ip}]]';
+    var ip = '[[${session.user.userIp}]]';
+    var bg = '[[${session.user.userBg}]]';
     $(function () {
-        console.log(ip)
+        if (bg == 1) {
+            $("#yincangyh").text("隐藏樱花背景");
+        }
+        if (bg == 2) {
+            $("#yincangyh").text("显示樱花背景");
+        }
         $("#h_honey").html(honey);
         $("#fenye_box").hide();
         if (jQuery.browser.mobile) {
@@ -590,7 +621,7 @@
         } else {
             document.getElementById("socketMessage").style.height = "570px";
         }
-            // console.log(document.getElementById("socketMessage").style.height + "sadasd")
+        // console.log(document.getElementById("socketMessage").style.height + "sadasd")
         if (username.indexOf("冲") != -1) {
             $(".chuibtn").hide();
             $(".fenbtn").hide();
@@ -844,7 +875,7 @@
             }
             $.post("/findBannad",{words:message},function (data) {
                 if (data.result.bannad === 1) {
-                        layer.msg('请文明用语哦~');
+                    layer.msg('请文明用语哦~');
                     return false;
                 }
                 websocket.send(message);
@@ -874,304 +905,30 @@
     <div id="message">……</div>
     <div id="mumu" class="mumu"></div>
 </div>
-</body>
 <script th:src="@{js/cw_left.js}"></script>
+<!--遮罩层-->
+<div class="panel-cover--overlay"></div>
+<div id="sakura_js_div" style="display: none !important;">
+    <block th:if="${session.user.userBg == 1}" >
+        <block th:include="common :: sakura_js" />
+    </block>
 
-<!-- sakura shader -->
-<script id="sakura_point_vsh" type="x-shader/x_vertex">
-uniform mat4 uProjection;
-uniform mat4 uModelview;
-uniform vec3 uResolution;
-uniform vec3 uOffset;
-uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
-uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
-
-attribute vec3 aPosition;
-attribute vec3 aEuler;
-attribute vec2 aMisc; //x:size, y:fade
-
-varying vec3 pposition;
-varying float psize;
-varying float palpha;
-varying float pdist;
-
-//varying mat3 rotMat;
-varying vec3 normX;
-varying vec3 normY;
-varying vec3 normZ;
-varying vec3 normal;
-
-varying float diffuse;
-varying float specular;
-varying float rstop;
-varying float distancefade;
-
-void main(void) {
-    // Projection is based on vertical angle
-    vec4 pos = uModelview * vec4(aPosition + uOffset, 1.0);
-    gl_Position = uProjection * pos;
-    gl_PointSize = aMisc.x * uProjection[1][1] / -pos.z * uResolution.y * 0.5;
-    
-    pposition = pos.xyz;
-    psize = aMisc.x;
-    pdist = length(pos.xyz);
-    palpha = smoothstep(0.0, 1.0, (pdist - 0.1) / uFade.z);
-    
-    vec3 elrsn = sin(aEuler);
-    vec3 elrcs = cos(aEuler);
-    mat3 rotx = mat3(
-        1.0, 0.0, 0.0,
-        0.0, elrcs.x, elrsn.x,
-        0.0, -elrsn.x, elrcs.x
-    );
-    mat3 roty = mat3(
-        elrcs.y, 0.0, -elrsn.y,
-        0.0, 1.0, 0.0,
-        elrsn.y, 0.0, elrcs.y
-    );
-    mat3 rotz = mat3(
-        elrcs.z, elrsn.z, 0.0, 
-        -elrsn.z, elrcs.z, 0.0,
-        0.0, 0.0, 1.0
-    );
-    mat3 rotmat = rotx * roty * rotz;
-    normal = rotmat[2];
-    
-    mat3 trrotm = mat3(
-        rotmat[0][0], rotmat[1][0], rotmat[2][0],
-        rotmat[0][1], rotmat[1][1], rotmat[2][1],
-        rotmat[0][2], rotmat[1][2], rotmat[2][2]
-    );
-    normX = trrotm[0];
-    normY = trrotm[1];
-    normZ = trrotm[2];
-    
-    const vec3 lit = vec3(0.6917144638660746, 0.6917144638660746, -0.20751433915982237);
-    
-    float tmpdfs = dot(lit, normal);
-    if(tmpdfs < 0.0) {
-        normal = -normal;
-        tmpdfs = dot(lit, normal);
-    }
-    diffuse = 0.4 + tmpdfs;
-    
-    vec3 eyev = normalize(-pos.xyz);
-    if(dot(eyev, normal) > 0.0) {
-        vec3 hv = normalize(eyev + lit);
-        specular = pow(max(dot(hv, normal), 0.0), 20.0);
-    }
-    else {
-        specular = 0.0;
-    }
-    
-    rstop = clamp((abs(pdist - uDOF.x) - uDOF.y) / uDOF.z, 0.0, 1.0);
-    rstop = pow(rstop, 0.5);
-    //-0.69315 = ln(0.5)
-    distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));
-}
-
+    <block th:if="${session.user.userBg == 2}" >
+        <block th:include="common :: bg_img_js" />
+    </block>
+</div>
+</body>
+<script type="text/javascript">
+    $("#yincangyh").click(function () {
+        var new_bg = 2;
+        if (bg == 2) {
+            new_bg = 1;
+        }
+        $.post("/changBg",{userName:username,userIp:ip,userBg:new_bg},function (res) {
+            if (res) {
+                location.href = "/toindex";
+            }
+        });
+    });
 </script>
-<script id="sakura_point_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-
-uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
-uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
-
-const vec3 fadeCol = vec3(0.08, 0.03, 0.06);
-
-varying vec3 pposition;
-varying float psize;
-varying float palpha;
-varying float pdist;
-
-//varying mat3 rotMat;
-varying vec3 normX;
-varying vec3 normY;
-varying vec3 normZ;
-varying vec3 normal;
-
-varying float diffuse;
-varying float specular;
-varying float rstop;
-varying float distancefade;
-
-float ellipse(vec2 p, vec2 o, vec2 r) {
-    vec2 lp = (p - o) / r;
-    return length(lp) - 1.0;
-}
-
-void main(void) {
-    vec3 p = vec3(gl_PointCoord - vec2(0.5, 0.5), 0.0) * 2.0;
-    vec3 d = vec3(0.0, 0.0, -1.0);
-    float nd = normZ.z; //dot(-normZ, d);
-    if(abs(nd) < 0.0001) discard;
-    
-    float np = dot(normZ, p);
-    vec3 tp = p + d * np / nd;
-    vec2 coord = vec2(dot(normX, tp), dot(normY, tp));
-    
-    //angle = 15 degree
-    const float flwrsn = 0.258819045102521;
-    const float flwrcs = 0.965925826289068;
-    mat2 flwrm = mat2(flwrcs, -flwrsn, flwrsn, flwrcs);
-    vec2 flwrp = vec2(abs(coord.x), coord.y) * flwrm;
-    
-    float r;
-    if(flwrp.x < 0.0) {
-        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.36, 0.96) * 0.5);
-    }
-    else {
-        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.58, 0.96) * 0.5);
-    }
-    
-    if(r > rstop) discard;
-    
-    vec3 col = mix(vec3(1.0, 0.8, 0.75), vec3(1.0, 0.9, 0.87), r);
-    float grady = mix(0.0, 1.0, pow(coord.y * 0.5 + 0.5, 0.35));
-    col *= vec3(1.0, grady, grady);
-    col *= mix(0.8, 1.0, pow(abs(coord.x), 0.3));
-    col = col * diffuse + specular;
-    
-    col = mix(fadeCol, col, distancefade);
-    
-    float alpha = (rstop > 0.001)? (0.5 - r / (rstop * 2.0)) : 1.0;
-    alpha = smoothstep(0.0, 1.0, alpha) * palpha;
-    
-    gl_FragColor = vec4(col * 0.5, alpha);
-}
-
-</script>
-<!-- effects -->
-<script id="fx_common_vsh" type="x-shader/x_vertex">
-uniform vec3 uResolution;
-attribute vec2 aPosition;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    gl_Position = vec4(aPosition, 0.0, 1.0);
-    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
-    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
-}
-
-</script>
-<script id="bg_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-
-uniform vec2 uTimes;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec3 col;
-    float c;
-    vec2 tmpv = texCoord * vec2(0.8, 1.0) - vec2(0.95, 1.0);
-    c = exp(-pow(length(tmpv) * 1.8, 2.0));
-    col = mix(vec3(0.02, 0.0, 0.03), vec3(0.96, 0.98, 1.0) * 1.5, c);
-    gl_FragColor = vec4(col * 0.5, 1.0);
-}
-
-</script>
-<script id="fx_brightbuf_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec4 col = texture2D(uSrc, texCoord);
-    gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 1.0);
-}
-
-</script>
-<script id="fx_dirblur_r4_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-uniform vec4 uBlurDir; //dir(x, y), stride(z, w)
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec4 col = texture2D(uSrc, texCoord);
-    col = col + texture2D(uSrc, texCoord + uBlurDir.xy * uDelta);
-    col = col + texture2D(uSrc, texCoord - uBlurDir.xy * uDelta);
-    col = col + texture2D(uSrc, texCoord + (uBlurDir.xy + uBlurDir.zw) * uDelta);
-    col = col + texture2D(uSrc, texCoord - (uBlurDir.xy + uBlurDir.zw) * uDelta);
-    gl_FragColor = col / 5.0;
-}
-
-</script>
-<!-- effect fragment shader template -->
-<script id="fx_common_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    gl_FragColor = texture2D(uSrc, texCoord);
-}
-
-</script>
-<!-- post processing -->
-<script id="pp_final_vsh" type="x-shader/x_vertex">
-uniform vec3 uResolution;
-attribute vec2 aPosition;
-varying vec2 texCoord;
-varying vec2 screenCoord;
-void main(void) {
-    gl_Position = vec4(aPosition, 0.0, 1.0);
-    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
-    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
-}
-
-</script>
-<script id="pp_final_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform sampler2D uBloom;
-uniform vec2 uDelta;
-varying vec2 texCoord;
-varying vec2 screenCoord;
-void main(void) {
-    vec4 srccol = texture2D(uSrc, texCoord) * 2.0;
-    vec4 bloomcol = texture2D(uBloom, texCoord);
-    vec4 col;
-    col = srccol + bloomcol * (vec4(1.0) + srccol);
-    col *= smoothstep(1.0, 0.0, pow(length((texCoord - vec2(0.5)) * 2.0), 1.2) * 0.5);
-    col = pow(col, vec4(0.45454545454545)); //(1.0 / 2.2)
-    
-    gl_FragColor = vec4(col.rgb, 1.0);
-    gl_FragColor.a = 1.0;
-}
-
-</script>
-<!-- partial -->
-<script th:src="@{js/sakura_script.js}"></script>
 </html>

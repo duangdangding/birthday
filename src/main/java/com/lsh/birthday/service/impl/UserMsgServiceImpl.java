@@ -33,4 +33,10 @@ public class UserMsgServiceImpl implements UserMsgService {
         return msg;
     }
 
+    @Override
+    public int updateBg(UserMsg userMsg) {
+        int i = userMsgMapper.updateBg(userMsg);
+        return i;
+    }
+
 }

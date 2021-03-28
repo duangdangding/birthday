@@ -9,4 +9,6 @@ public interface UserMsgMapper {
     Integer addUser(UserMsg userMsg);
     
     UserMsg findBynameip(UserMsg userMsg);
+    
+    int updateBg(UserMsg userMsg);
 }
