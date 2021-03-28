@@ -311,6 +311,19 @@ public class RedisUtil {
             return null;
         }
     }
+    /**
+     * 根据key获取该key中的随机的一个
+     *
+     * @param key 键
+     */
+    public Object sGetRan(String key) {
+        try {
+            return redisTemplate.opsForSet().randomMember(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /**
      * 根据value从一个set中查询,是否存在

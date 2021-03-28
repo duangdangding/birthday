@@ -109,4 +109,5 @@ public class LoginCtr {
         numMap.put("send_zfnum",send_zfnum.longValue());
         return numMap;
     }
+    
 }

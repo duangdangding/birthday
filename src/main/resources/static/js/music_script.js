@@ -313,8 +313,8 @@ $(function () {
 	 * @param int
 	 */
 	q.play = function (n) {
-		if (q.load(n))
-			return;
+		/*if (q.load(n))
+			return;*/
 		$player.addClass('playing');
 		if (isLoad) {
 			var id = q.current.id;

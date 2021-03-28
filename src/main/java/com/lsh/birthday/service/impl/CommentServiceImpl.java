@@ -39,25 +39,4 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper,Comment> imple
         return commentMapper.addComm(comment);
     }
 
-    @Override
-    public int findBannadWords(String words) {
-        int res = 0;
-        if (!words.isEmpty()) {
-            String replace = words.replace(" ", "").replace(",", "").replace("、", "")
-                    .replace("，", "").replace("。", "").replace("/", "")
-                    .replace("\\", "").replace("|", "").replace("*", "")
-                    .replace("%", "").replace("&", "").replace("#", "")
-                    .replace("^", "").replace("@", "").replace("~", "");
-            Set<Object> bannaword = redisUtil.sGet("bannaword");
-            Iterator<Object> iterator = bannaword.iterator();
-            while (iterator.hasNext()) {
-                String next = (String) iterator.next();
-                if (replace.contains(next)) {
-                    res = 1;
-                    break;
-                }
-            }
-        }
-        return res;
-    }
 }

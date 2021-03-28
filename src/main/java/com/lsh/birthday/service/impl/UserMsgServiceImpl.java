@@ -3,6 +3,7 @@ package com.lsh.birthday.service.impl;
 import com.lsh.birthday.entry.UserMsg;
 import com.lsh.birthday.mapper.UserMsgMapper;
 import com.lsh.birthday.service.UserMsgService;
+import com.lsh.birthday.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,8 @@ public class UserMsgServiceImpl implements UserMsgService {
     
     @Autowired
     private UserMsgMapper userMsgMapper;
+    @Autowired
+    private RedisUtil redisUtil;
     
     @Override
     public int updateSum(UserMsg userMsg) {
@@ -29,4 +32,5 @@ public class UserMsgServiceImpl implements UserMsgService {
         UserMsg msg = userMsgMapper.findBynameip(userMsg);
         return msg;
     }
+
 }

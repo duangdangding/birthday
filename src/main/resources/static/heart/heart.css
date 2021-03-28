@@ -1,0 +1,25 @@
+
+.hertspan {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    background-image: url(heart.png);
+    background-size: cover;
+    transform: translate(-50%,-50%);
+    animation: animate 2s linear infinite;
+    z-index: 99999999999999999;
+}
+
+@keyframes animate {
+    0% {
+        transform: translate(-50%,-50%);
+        opacity: 1;
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%,-1000%);
+        opacity: 0;
+        filter: hue-rotate(720deg);
+    }
+}

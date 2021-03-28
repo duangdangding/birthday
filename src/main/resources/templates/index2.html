@@ -12,6 +12,9 @@
     <link rel="stylesheet" th:href="@{css/zf_style.css}" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.6/css/bootstrap.min.css" /><!--CSS RESET-->
     <link rel="stylesheet" th:href="@{css/fenye.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/layui/layer.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/weather/weather.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/heart/heart.css}" type="text/css" />
     <style>
         /*html{font-size:62.5%;}*/
         .zf_disabled { pointer-events: none; }
@@ -136,12 +139,26 @@
             cursor: url("/cursor/Arrow.cur"),default;
         }
         a:hover{url("/cursor/Help.cur"),default;}
+        #he-plugin-simple{
+            width: 12em;
+            position: absolute !important; 
+            right: 0;
+        }
+        .s-sticker{
+            font-size: 1em !important;
+            padding: 0 !important;
+        }
+        .module{
+            font-size: 1.5em !important;
+            margin: 0;
+            padding: 0 2px !important;
+        }
+         
     </style>
     
     <!--    <link rel="stylesheet" th:href="@{css/sakura_style.css}" type="text/css" />-->
     <script th:src="@{js/jquery-3.8.min.js}"></script>
-    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" type="text/css" />
-    <script src="//res.layui.com/layui/dist/layui.js?t=1616653624947"></script>
+    <script th:src="@{/layui/layer.js}" ></script>
     <script th:src="@{js/jquery.marquee.min.js}"></script>
     <script th:src="@{js/sakura_prefixfree.min.js}"></script>
     <script th:src="@{js/music_script.js}"></script>
@@ -149,7 +166,49 @@
     <script th:src="@{js/click_xin.js}" ></script>
 </head>
 
-<body id="videobox">
+<body>
+<div id="he-plugin-simple"></div>
+<script>
+    document.onmousemove = function(event){
+        var body = document.querySelector("body");
+        var heart = document.createElement("span");
+        heart.classList.add("hertspan");
+        var x = event.offsetX;
+        // var y = event.offsetY;
+        var y = event.clientY;
+        heart.style.left = x + "px";
+        heart.style.top = y + "px";
+        var size =Math.random()*25;
+        heart.style.width = size + "px";
+        heart.style.height = size + "px";
+        body.appendChild(heart);
+        setTimeout(function(){
+            heart.remove();
+        },2000);
+    }
+    WIDGET = {
+        "CONFIG": {
+            "modules": "01234",
+            "background": "1",
+            "tmpColor": "FFFFFF",
+            "tmpSize": "16",
+            "cityColor": "FFFFFF",
+            "citySize": "16",
+            "aqiColor": "FFFFFF",
+            "aqiSize": "16",
+            "weatherIconSize": "24",
+            "alertIconSize": "18",
+            "padding": "10px 10px 10px 10px",
+            "shadow": "0",
+            "language": "auto",
+            "fixed": "false",
+            "vertical": "top",
+            "horizontal": "left",
+            "key": "fb860794d4a845f98a28c130018a246f"
+        }
+    }
+</script>
+<script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
 <!-- 音乐播放器 -->
 <div id="QPlayer">
     <div class="body">
@@ -784,21 +843,18 @@
                 message = message.substring(0, 200);
             }
             $.post("/findBannad",{words:message},function (data) {
-                console.log(data.result.bannad)
                 if (data.result.bannad === 1) {
-                    layer.ready(function(){
                         layer.msg('请文明用语哦~');
-                    });
                     return false;
                 }
+                websocket.send(message);
+                $("#text").val("");
+                // $("#socketMessage").scrollTop($("#socketMessage").height());
+                $('#socketMessage').animate({
+                    scrollTop: $('#socketMessage').get(0).scrollHeight
+                }, 100);
             })
-            websocket.send(message);
-            $("#text").val("");
         }
-        // $("#socketMessage").scrollTop($("#socketMessage").height());
-        $('#socketMessage').animate({
-            scrollTop: $('#socketMessage').get(0).scrollHeight
-        }, 100);
     }
 
     init();

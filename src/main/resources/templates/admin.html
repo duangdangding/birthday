@@ -15,14 +15,34 @@
     <div>
         <h1>添加敏感词</h1>
         <input type="text" id="addBannad"/> <button id="bannda" onclick="addbannd()">添加</button>
+        <button onclick="getbannd()">所有敏感词</button>
         <p id="addbann_msg"></p>
+        <p id="banads"></p>
     </div>
-<button onclick="test()">asdasd</button>
+    <div>
+        <h1>添加随机名字</h1>
+        <input type="text" id="addRundomname"/> <button id="randomname" onclick="addrandom()">添加</button>
+        <button onclick="getrandom()">所有随机名字</button>
+        <p id="addrand_msg"></p>
+        <p id="randomNams"></p>
+    </div>
 </body>
 <script type="text/javascript">
-    function test() {
-        layer.msg('hello');
+    function getbannd() {
+        $.get("/getAllBannd",function (data) {
+            if (data) {
+                $("#banads").html(JSON.stringify(data));
+            }
+        });
     }
+    function getrandom() {
+        $.get("/getAllRanname",function (data) {
+            if (data) {
+                $("#randomNams").html(JSON.stringify(data));
+            }
+        });
+    }
+    /*添加敏感词*/
     function addbannd() {
         var word = $("#addBannad").val().trim();
         if (word.length > 0) {
@@ -30,6 +50,8 @@
                 if (data) {
                     $("#addbann_msg").html(JSON.stringify(data));
                     $("#addBannad").val("");
+                    /*加载列表*/
+                    getbannd();
                 }
             });
         }
@@ -38,6 +60,24 @@
         var code = event.keyCode;
         if (code == 13) {
             $('#bannda').click();
+        }
+    })
+    function addrandom() {
+        var name = $("#addRundomname").val().trim();
+        if (name.length > 0) {
+            $.post("/setRandName",{username:name},function (data) {
+                if (data) {
+                    $("#addrand_msg").html(JSON.stringify(data));
+                    $("#addRundomname").val("");
+                    getrandom();
+                }
+            });
+        }
+    }
+    $("#addRundomname").keydown(function (event) {
+        var code = event.keyCode;
+        if (code == 13) {
+            $('#randomname').click();
         }
     })
 </script>

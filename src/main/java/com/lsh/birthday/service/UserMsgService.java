@@ -9,4 +9,5 @@ public interface UserMsgService {
     Integer addUser(UserMsg userMsg);
 
     UserMsg findBynameip(UserMsg userMsg);
+    
 }

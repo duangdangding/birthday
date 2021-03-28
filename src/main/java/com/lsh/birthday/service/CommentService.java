@@ -12,5 +12,4 @@ public interface CommentService extends IService<Comment> {
     
     Long addComm(Comment comment);
 
-    int findBannadWords(String words);
 }

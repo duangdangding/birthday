@@ -28,16 +28,4 @@ public class CommentCtr {
         return new BootStrapResult<Comment>(all.getRecords(),all.getTotal());
     }
 
-    /**
-     * 查询是不是有敏感词
-     * @param words
-     * @return
-     */
-    @RequestMapping("/findBannad")
-    public ResultDto<Map<String,Object>> findBannadWords(String words) {
-        Map<String,Object> map = new HashMap<>();
-        int bannadWords = commentService.findBannadWords(words);
-        map.put("bannad",bannadWords);
-        return ResultDtoManager.success(map);
-    }
 }
