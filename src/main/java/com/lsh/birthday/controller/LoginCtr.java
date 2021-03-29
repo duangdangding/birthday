@@ -114,9 +114,9 @@ public class LoginCtr {
     @RequestMapping("/changBg")
     public ResultDto<Object> changeBg(UserMsg userMsg,HttpSession session) {
         int i = userMsgService.updateBg(userMsg);
-//        UserMsg user = (UserMsg) session.getAttribute("user");
-//        UserMsg userMsg = userMsgService.findBynameip(user);
-        session.setAttribute("user",userMsg);
+        UserMsg user = (UserMsg) session.getAttribute("user");
+        UserMsg userMsg1 = userMsgService.findBynameip(user);
+        session.setAttribute("user",userMsg1);
         return ResultDtoManager.success(i);
     }
 }
