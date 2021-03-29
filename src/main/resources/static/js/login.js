@@ -16,7 +16,8 @@ $('#login-button').click(function (event) {
 				layer.msg('请文明入场~');
 				return false;
 			}
-			$.post("/login",{username:userName},function (res){
+			var xingzuo = $("#xingzuo").val();
+			$.post("/login",{username:userName,userXz:xingzuo},function (res){
 				event.preventDefault();
 				$('.form').fadeOut(100);
 				$('.wrapper').addClass('form-success');

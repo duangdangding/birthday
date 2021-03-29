@@ -13,9 +13,9 @@ jQuery(document).ready(function ($) {
 	//$(".mumu").jrumble({rangeX: 2,rangeY: 2,rangeRot: 1});
 	$(".mumu").mouseover(function () {
 		$(".mumu").fadeTo("300", 0.3);
-		quanMsg = ["我隐身了，你看不到我", "我会隐身哦！嘿嘿！", "别动手动脚的，把手拿开！", "把手拿开我才出来！"];
+		/*quanMsg = ["我隐身了，你看不到我", "我会隐身哦！嘿嘿！", "别动手动脚的，把手拿开！", "把手拿开我才出来！"];
 		var i = Math.floor(Math.random() * quanMsg.length);
-		showMessage(quanMsg[i]);
+		showMessage(quanMsg[i]);*/
 	});
 	$(".mumu").mouseout(function () {
 		$(".mumu").fadeTo("300", 1)

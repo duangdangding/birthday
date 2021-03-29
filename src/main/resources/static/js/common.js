@@ -22,4 +22,22 @@ function requestFullScreen(element) {
  */
 function ranNUm(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
-} 
+}
+/* 鼠标拖尾小心心 */
+document.onmousemove = function(event){
+    var body = document.querySelector("body");
+    var heart = document.createElement("span");
+    heart.classList.add("hertspan");
+    var x = event.offsetX;
+    // var y = event.offsetY;
+    var y = event.clientY;
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+    var size =Math.random()*25;
+    heart.style.width = size + "px";
+    heart.style.height = size + "px";
+    body.appendChild(heart);
+    setTimeout(function(){
+        heart.remove();
+    },2000);
+}

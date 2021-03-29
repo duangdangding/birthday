@@ -31,7 +31,7 @@ public class LoginCtr {
     private UserMsgService userMsgService;
     
     @RequestMapping("/login")
-    public ResultDto<String> toLogin(String username, HttpSession session, HttpServletRequest request) {
+    public ResultDto<String> toLogin(String username,String userXz, HttpSession session, HttpServletRequest request) {
         String url = request.getRequestURL().toString();
 //        ws://129.211.113.87:11203/birthday/server
         String ip = "localhost";
@@ -64,6 +64,7 @@ public class LoginCtr {
         UserMsg userMsg = new UserMsg();
         userMsg.setUserName(username);
         userMsg.setUserIp(ipAddr);
+        userMsg.setUserXz(userXz);
         String address = IPHelper.getAddressByIp(ipAddr);
         userMsg.setUserAddress(address);
 //        判断是否存在相同的ip和名字

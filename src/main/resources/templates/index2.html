@@ -15,6 +15,7 @@
     <link rel="stylesheet" th:href="@{/layui/layer.css}" type="text/css" />
     <link rel="stylesheet" th:href="@{/weather/weather.css}" type="text/css" />
     <link rel="stylesheet" th:href="@{/heart/heart.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/xingzuo/xingzuo.css}" type="text/css" />
     <style>
         /*html{font-size:62.5%;}*/
         .zf_disabled { pointer-events: none; }
@@ -140,7 +141,6 @@
             background-size: cover !important;
             position: absolute !important;
         }
-        a:hover{url("/cursor/Help.cur"),default;}
         #he-plugin-simple{
             width: 12em;
             position: absolute !important;
@@ -190,27 +190,23 @@
 </head>
 
 <body>
-<!--<a href="#" class="button small gray">Small Button</a>-->
+<!--更换背景-->
 <button id="yincangyh"  title="如果卡的话可以隐藏樱花背景">隐藏樱花背景</button>
+<!-- 天气插件 -->
 <div id="he-plugin-simple"></div>
+<!-- 星座运势 -->
+<div class="xz_box">
+    <button type="button" class="xz_title"><img src="/xingzuo/b_xin.gif" alt="favorite" />星座运势</button>
+    <div id="xz_content"></div>
+</div>
 <script>
-    document.onmousemove = function(event){
-        var body = document.querySelector("body");
-        var heart = document.createElement("span");
-        heart.classList.add("hertspan");
-        var x = event.offsetX;
-        // var y = event.offsetY;
-        var y = event.clientY;
-        heart.style.left = x + "px";
-        heart.style.top = y + "px";
-        var size =Math.random()*25;
-        heart.style.width = size + "px";
-        heart.style.height = size + "px";
-        body.appendChild(heart);
-        setTimeout(function(){
-            heart.remove();
-        },2000);
-    }
+    $(".xz_title").click(function () {
+        if ($("#xz_content").is(':hidden')) {
+            $("#xz_content").show();
+        } else {
+            $("#xz_content").hide();
+        }
+    });
     WIDGET = {
         "CONFIG": {
             "modules": "01234",

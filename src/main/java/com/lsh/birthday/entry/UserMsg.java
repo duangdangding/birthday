@@ -12,6 +12,7 @@ public class UserMsg implements Serializable {
     private int loginSum;
     private String userAddress;
     private int userBg = 1;
+    private String userXz;
 
     public int getUserId() {
         return userId;
@@ -69,4 +70,11 @@ public class UserMsg implements Serializable {
         this.userBg = userBg;
     }
 
+    public String getUserXz() {
+        return userXz;
+    }
+
+    public void setUserXz(String userXz) {
+        this.userXz = userXz;
+    }
 }

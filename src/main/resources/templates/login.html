@@ -23,11 +23,22 @@
 			margin: 0 auto;
 		}
 		#welcomuu{
-			display: none;text-align: center;margin-top: 10px;
+			text-align: center;margin-top: 10px;
 			font-size: 1.5em;
 			display: inline-flex !important;
 			white-space:nowrap !important;
 		}
+		#xingzuo{
+			color: #2E2D3C;
+			text-align: center;
+			width: 10em;
+			display: block;
+			text-align-last: center;
+		}
+		/*#xingzuo option{
+			margin: 0 auto;text-align: center;text-align-last: center;
+			padding: 0 0 0 20px;
+		}*/
 	</style>
 </head>
 <body>
@@ -38,6 +49,20 @@
 			<div id="loginForm" class="form" method="post">
 				<input id="userName" name="username" type="text" placeholder="姓名">
 				<button id="randomname">随机名字</button>
+				<select id="xingzuo">
+					<option value="白羊座">白羊座</option>
+					<option value="双鱼座">双鱼座</option>
+					<option value="金牛座">金牛座</option>
+					<option value="双子座">双子座</option>
+					<option value="巨蟹座">巨蟹座</option>
+					<option value="狮子座">狮子座</option>
+					<option value="处女座">处女座</option>
+					<option value="天秤座">天秤座</option>
+					<option value="天蝎座">天蝎座</option>
+					<option value="射手座">射手座</option>
+					<option value="摩羯座">摩羯座</option>
+					<option value="水瓶座">水瓶座</option>
+				</select>
 				<button id="login-button">进入</button>
 			</div>
 			<h1 id="welcomuu" ></h1>
@@ -64,25 +89,5 @@
 <script th:src="@{js/common.js}" ></script>
 <script th:src="@{js/login.js}" ></script>
 <script th:src="@{js/click_xin.js}" ></script>
-<script>
-	document.onmousemove = function(event){
-		var body = document.querySelector("body");
-		var heart = document.createElement("span");
-		heart.className = "hertspan";
-		var x = event.offsetX;
-		// var y = event.offsetY;
-		var y = event.clientY;
-		heart.style.left = x + "px";
-		heart.style.top = y + "px";
-		var size =Math.random()*20;
-		heart.style.width = size + "px";
-		heart.style.height = size + "px";
-		body.appendChild(heart);
-
-		setTimeout(function(){
-			heart.remove();
-		},2000);
-	}
-</script>
 </body>
 </html>

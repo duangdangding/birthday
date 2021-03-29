@@ -76,7 +76,7 @@ body :-ms-input-placeholder {
   position: relative;
   z-index: 2;
 }
-.form input {
+.form input,.form select {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;

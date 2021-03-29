@@ -1,0 +1,40 @@
+.xz_title{
+    width: 8em;
+    line-height: 12pt;
+    height: 2em;
+    transform: rotate(90deg);
+    ms-transform: rotate(90deg);
+    moz-transform: rotate(90deg);
+    webkit-transform: rotate(90deg);
+    o-transform: rotate(90deg);
+    background: url(/xingzuo/bg7.jpg) no-repeat left top;
+    font-family: "Arial","Tahoma","微软雅黑","雅黑";
+    border: 0px;
+    vertical-align: middle;
+    background-position: left -2em;
+    background-size: 7em 6em;
+    font-size: 0.7em;
+    padding: 0;
+    margin-right: -3em;
+}
+.xz_title img{
+    width: 2.5em;
+    height: 2.5em;
+    margin: -5px 0 -10px -15px;
+}
+.xz_box{
+    display: block;
+    position: absolute;
+    top: 100px;
+    right: 0;
+}
+#xz_content{
+    position: absolute;
+    display: none;
+    top: -2em;
+    right: 1.4em;
+    width: 19em;
+    height: 25em;
+    background: url("xzbg.png") no-repeat 100%;
+    /*background-size: 100% 100%;*/
+}
