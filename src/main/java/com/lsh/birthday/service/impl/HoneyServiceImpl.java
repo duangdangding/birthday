@@ -17,9 +17,4 @@ public class HoneyServiceImpl implements HoneyService {
         return honeyMapper.selectOne(null);
     }
 
-    @Override
-    public int update(String hName) {
-        Honey honey = new Honey(1,hName);
-        return honeyMapper.update(honey);
-    }
 }

@@ -15,4 +15,6 @@ public interface RedisService {
     long setRandomName(String username);
 
     int findBannadWords(String words);
+    
+    String getXzys(String xz);
 }

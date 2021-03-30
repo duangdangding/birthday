@@ -21,19 +21,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper,Comment> imple
     
     @Autowired
     private CommentMapper commentMapper;
-    @Autowired
-    private RedisUtil redisUtil;
     
-    @Override
-    public IPage<Comment> findAll(Integer page, Integer size) {
-        Page<Comment> pageData = new Page<>(page,size);
-//        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
-//        wrapper.orderByDesc("createtime");
-        IPage<Comment> commentIPage = commentMapper.selectByPage1(pageData);
-//        pageData.setRecords(commentMapper.selectPage(pageData, wrapper).getRecords());
-        return commentIPage;
-    }
-
     @Override
     public Long addComm(Comment comment) {
         return commentMapper.addComm(comment);

@@ -12,8 +12,6 @@ public class UserMsgServiceImpl implements UserMsgService {
     
     @Autowired
     private UserMsgMapper userMsgMapper;
-    @Autowired
-    private RedisUtil redisUtil;
     
     @Override
     public int updateSum(UserMsg userMsg) {

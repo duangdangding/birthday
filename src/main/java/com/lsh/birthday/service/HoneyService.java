@@ -5,5 +5,4 @@ import com.lsh.birthday.entry.Honey;
 public interface HoneyService {
     Honey find();
     
-    int update(String hName);
 }

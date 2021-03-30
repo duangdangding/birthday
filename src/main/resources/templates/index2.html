@@ -146,6 +146,7 @@
             position: absolute !important;
             right: 0;
         }
+        #he-plugin-simple div{z-index: 30}
         .s-sticker{
             font-size: 1em !important;
             padding: 0 !important;
@@ -156,26 +157,26 @@
             padding: 0 2px !important;
         }
         #yincangyh{
+            display: block;
             position: absolute;
-            background-color: #b6bbc0;
             top: 0;
             left: 0;
-            z-index: 9999999999;
-            border: 1px solid #a5a5a5 !important;
-            font: 0.5em Calibri, Arial, sans-serif;
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
-            text-decoration: none !important;
-            white-space: nowrap;
-            background-image: url(/img/button_bg.png), url(/img/button_bg.png), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(202,205,208,1)), to(rgba(202,205,208,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#d1d3d6), to(#9fa5a9));
-            vertical-align: baseline;
-            cursor: pointer;
-            /*padding: 10px 20px;*/
-            background-repeat: no-repeat;
-            background-clip: border-box;
-            border-radius: 8px;
-            box-shadow: 0 0 1px #fff inset;
-            transition: background-position 1s;
-            font-weight: bold;
+            width: 10em;
+            line-height: 13pt;
+            height: 2em;
+            background: url(/xingzuo/bg7.jpg) no-repeat left top;
+            /*font-family: "Arial","Tahoma","微软雅黑","雅黑";*/
+            border: 0px;
+            vertical-align: middle;
+            background-position: left -2em;
+            background-size: 9.5em 6em;
+            font-size: 0.7em;
+            letter-spacing: 0.3pt;
+        }
+        #yincangyh img{
+            width: 2.5em;
+            height: 2.5em;
+            margin: -5px -3px -4px -11px;
         }
     </style>
 
@@ -191,20 +192,37 @@
 
 <body>
 <!--更换背景-->
-<button id="yincangyh"  title="如果卡的话可以隐藏樱花背景">隐藏樱花背景</button>
+<button type="button" id="yincangyh" title="如果卡的话可以隐藏樱花背景"><img src="/xingzuo/b_xin.gif" /><span id="ycyhBtn">隐藏樱花背景</span></button>
+<!--<button id="yincangyh"  title="如果卡的话可以隐藏樱花背景">隐藏樱花背景</button>-->
 <!-- 天气插件 -->
 <div id="he-plugin-simple"></div>
 <!-- 星座运势 -->
 <div class="xz_box">
     <button type="button" class="xz_title"><img src="/xingzuo/b_xin.gif" alt="favorite" />星座运势</button>
-    <div id="xz_content"></div>
+    <div id="xz_content">
+        <h4><span id="xzName"></span>今日运势</h4>
+        <div id="resShow"></div>
+    </div>
 </div>
 <script>
     $(".xz_title").click(function () {
-        if ($("#xz_content").is(':hidden')) {
-            $("#xz_content").show();
+        var content = $("#xz_content");
+        var xzs = $("#resShow");
+        if (content.is(':hidden')) {
+            content.show();
+            if (xzs.is(":empty")) {
+                $.ajax({
+                    type: "get",
+                    url: "/getXzys",
+                    // dataType:"json",
+                    success:function (data) {
+                        xzs.html(data);
+                        $("#xzName").text($("#xz_name").text());
+                    }
+                })
+            }
         } else {
-            $("#xz_content").hide();
+            content.hide();
         }
     });
     WIDGET = {
@@ -605,10 +623,10 @@
     var bg = '[[${session.user.userBg}]]';
     $(function () {
         if (bg == 1) {
-            $("#yincangyh").text("隐藏樱花背景");
+            $("#ycyhBtn").text("隐藏樱花背景");
         }
         if (bg == 2) {
-            $("#yincangyh").text("显示樱花背景");
+            $("#ycyhBtn").text("显示樱花背景");
         }
         $("#h_honey").html(honey);
         $("#fenye_box").hide();

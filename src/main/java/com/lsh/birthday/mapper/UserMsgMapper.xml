@@ -3,10 +3,6 @@
 
 <mapper namespace="com.lsh.birthday.mapper.UserMsgMapper">
 
-    <!-- 查找信息 -->
-    <select id="findAll" resultType="com.lsh.birthday.entry.UserMsg">
-        select * from user_msg
-    </select>
     <select id="findByUserId" resultType="com.lsh.birthday.entry.UserMsg">
         select * from user_msg where user_id = #{userId}
     </select>

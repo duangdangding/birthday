@@ -33,8 +33,21 @@
     display: none;
     top: -2em;
     right: 1.4em;
-    width: 19em;
-    height: 25em;
-    background: url("xzbg.png") no-repeat 100%;
-    /*background-size: 100% 100%;*/
+    width: 25em;
+    height: 30em;
+    background: url("xzbg.png") no-repeat ;
+    background-size: 100% 100%;
+    z-index: 20;
+}
+#xz_content h4 {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+#resShow {
+    margin: 20px 27px 0px 25px;
+}
+#resShow p{
+    margin: 0;
+    font-weight: bold;
 }

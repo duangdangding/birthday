@@ -6,6 +6,7 @@ import com.lsh.birthday.entry.ResultDto;
 import com.lsh.birthday.entry.ResultDtoManager;
 import com.lsh.birthday.entry.UserMsg;
 import com.lsh.birthday.service.UserMsgService;
+import com.lsh.birthday.utils.ApiUtil;
 import com.lsh.birthday.utils.RedisUtil;
 import com.lsh.birthday.utils.ip.IPHelper;
 import org.slf4j.Logger;
@@ -56,16 +57,22 @@ public class LoginCtr {
             username = "无名氏";
         }
         String ipAddr = IPHelper.getIpAddr(request);
-//        session.setAttribute("ip",ip1);
         if ("0:0:0:0:0:0:0:1".equals(ipAddr) || "localhost".equals(ipAddr) || "127.0.0.1".equals(ipAddr)) {
             ipAddr = IPHelper.getIp();
         }
-//        http://ip.geo.iqiyi.com/cityjson?format=json&ip=61.153.252.254
         UserMsg userMsg = new UserMsg();
         userMsg.setUserName(username);
         userMsg.setUserIp(ipAddr);
         userMsg.setUserXz(userXz);
-        String address = IPHelper.getAddressByIp(ipAddr);
+//        http://ip.geo.iqiyi.com/cityjson?format=json&ip=61.153.252.254
+        //查询Ip信息的接口，返回json 
+        //		{"code":"A00000","data":{"country":"中国","province":"浙江","city":"金华","country_id":48,"province_id":10,"city_id":10007,"location_id":26010007,"isp_id":26,"isp":"电信","longitude":0,"latitude":0,"ip":"61.153.252.254"}}
+        String urlApi = "http://ip.geo.iqiyi.com/cityjson";
+        Map param = new HashMap();
+        param.put("format","json");
+        param.put("ip",ipAddr);
+        /*如果限制查询次数  则存进数据库*/
+        String address = ApiUtil.httpRequest(urlApi,param);
         userMsg.setUserAddress(address);
 //        判断是否存在相同的ip和名字
         UserMsg msg = userMsgService.findBynameip(userMsg);

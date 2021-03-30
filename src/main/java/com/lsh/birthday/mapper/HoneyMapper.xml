@@ -3,10 +3,6 @@
 
 <mapper namespace="com.lsh.birthday.mapper.HoneyMapper">
 
-    <!-- 查找信息 -->
-    <select id="findAll" resultType="com.lsh.birthday.entry.Honey">
-        select * from honey
-    </select>
     <update id="update" parameterType="com.lsh.birthday.entry.Honey">
         UPDATE honey SET h_name=#{hName} WHERE h_id=#{hId}
     </update>
